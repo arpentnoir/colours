@@ -31,12 +31,12 @@ public class Assets implements Disposable, AssetErrorListener {
   public static final Assets instance = new Assets();
 
   public AssetRed red;
+  public AssetOrange orange;
+  public AssetYellow yellow;
   public AssetGreen green;
   public AssetBlue blue;
-  public AssetCyan cyan;
-  public AssetMagenta magenta;
-  public AssetYellow yellow;
-  public AssetWhite white;
+  public AssetPurple purple;
+  public AssetBrown brown;
 
   private AssetManager assetManager;
   // singleton: prevent instantiation from other classes
@@ -67,11 +67,12 @@ public class Assets implements Disposable, AssetErrorListener {
 
     // Create game resource objects
     red = new AssetRed(atlas);
+    yellow = new AssetYellow(atlas);
+    orange = new AssetOrange(atlas);
     green = new AssetGreen(atlas);
     blue = new AssetBlue(atlas);
-    cyan = new AssetCyan(atlas);
-    magenta = new AssetMagenta(atlas);
-    yellow = new AssetYellow(atlas);
+    purple = new AssetPurple(atlas);
+    brown = new AssetBrown(atlas);
   }
 
   @Override
@@ -110,35 +111,11 @@ public class Assets implements Disposable, AssetErrorListener {
     }
   }
 
-  public class AssetBlue{
-    public final TextureAtlas.AtlasRegion blue;
+  public class AssetOrange{
+    public final TextureAtlas.AtlasRegion orange;
 
-    public AssetBlue(TextureAtlas atlas){
-      blue = atlas.findRegion("blue");
-    }
-  }
-
-  public class AssetGreen{
-    public final TextureAtlas.AtlasRegion green;
-
-    public AssetGreen(TextureAtlas atlas){
-      green = atlas.findRegion("green");
-    }
-  }
-
-  public class AssetCyan{
-    public final TextureAtlas.AtlasRegion cyan;
-
-    public AssetCyan(TextureAtlas atlas){
-      cyan = atlas.findRegion("cyan");
-    }
-  }
-
-  public class AssetMagenta{
-    public final TextureAtlas.AtlasRegion magenta;
-
-    public AssetMagenta(TextureAtlas atlas){
-      magenta = atlas.findRegion("magenta");
+    public AssetOrange(TextureAtlas atlas){
+      orange = atlas.findRegion("orange");
     }
   }
 
@@ -150,11 +127,35 @@ public class Assets implements Disposable, AssetErrorListener {
     }
   }
 
-  public class AssetWhite{
-    public final TextureAtlas.AtlasRegion white;
+  public class AssetGreen{
+    public final TextureAtlas.AtlasRegion green;
 
-    public AssetWhite(TextureAtlas atlas){
-      white = atlas.findRegion("white");
+    public AssetGreen(TextureAtlas atlas){
+      green = atlas.findRegion("green");
+    }
+  }
+
+  public class AssetBlue{
+    public final TextureAtlas.AtlasRegion blue;
+
+    public AssetBlue(TextureAtlas atlas){
+      blue = atlas.findRegion("blue");
+    }
+  }
+
+  public class AssetPurple{
+    public final TextureAtlas.AtlasRegion purple;
+
+    public AssetPurple(TextureAtlas atlas){
+      purple = atlas.findRegion("purple");
+    }
+  }
+
+  public class AssetBrown{
+    public final TextureAtlas.AtlasRegion brown;
+
+    public AssetBrown(TextureAtlas atlas){
+      brown = atlas.findRegion("brown");
     }
   }
 

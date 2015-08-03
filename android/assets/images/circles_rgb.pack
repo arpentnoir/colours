@@ -3,49 +3,49 @@ input1.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-red
+yellow
   rotate: false
   xy: 2, 2
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
   index: -1
-orange
+white
   rotate: false
   xy: 260, 2
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
   index: -1
-yellow
+red
   rotate: false
   xy: 518, 2
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
   index: -1
-green
+magenta
   rotate: false
   xy: 2, 260
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
   index: -1
-brown
+green
   rotate: false
   xy: 2, 518
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
   index: -1
-blue
+cyan
   rotate: false
   xy: 260, 260
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
   index: -1
-purple
+blue
   rotate: false
   xy: 518, 260
   size: 256, 256

@@ -9,16 +9,16 @@ public class Constants {
   public enum COLOUR{RED, BLUE, GREEN, CYAN, MAGENTA, YELLOW, WHITE}
 
   // Visible game world is 10 meters wide
-  public static final float VIEWPORT_WIDTH = 10f;
+  public static final float VIEWPORT_WIDTH = 9f;
 
   // Visible game world is 6 meters tall
-  public static final float VIEWPORT_HEIGHT = 6f;
+  public static final float VIEWPORT_HEIGHT = 16f;
 
   // GUI width
-  public static final float VIEWPORT_GUI_WIDTH = 800.0f;
+  public static final float VIEWPORT_GUI_WIDTH = 540.0f;
 
   // GUI Height
-  public static final float VIEWPORT_GUI_HEIGHT = 480.0f;
+  public static final float VIEWPORT_GUI_HEIGHT = 960.0f;
 
   // Location of description file for texture atlas
   public static final String TEXTURE_ATLAS_OBJECTS = "images/circles.pack";

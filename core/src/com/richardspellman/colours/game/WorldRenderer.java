@@ -3,6 +3,7 @@ package com.richardspellman.colours.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.Gdx;
@@ -29,6 +30,7 @@ public class WorldRenderer implements Disposable {
   private WorldController worldController;
   private static final boolean DEBUG_DRAW_BOX2D_WORLD = true;
   private Box2DDebugRenderer debugRenderer;
+  private ShapeRenderer shapeRenderer;
 
   public WorldRenderer(WorldController worldController){
     this.worldController = worldController;
@@ -44,11 +46,15 @@ public class WorldRenderer implements Disposable {
     cameraGUI.position.set(0, 0, 0);
     cameraGUI.setToOrtho(true); // flip y-axis
     cameraGUI.update();
+
+    shapeRenderer = new ShapeRenderer();
+    shapeRenderer.setProjectionMatrix(camera.combined);
   }
 
   public void render(){
     renderWorld(batch);
     renderGui(batch);
+    //renderDebug(batch);
   }
 
   public void renderWorld(SpriteBatch batch){
@@ -58,6 +64,12 @@ public class WorldRenderer implements Disposable {
     worldController.level.render(batch);
     batch.end();
 
+  }
+
+  public void renderDebug(SpriteBatch batch){
+    shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+    shapeRenderer.line(0, -3, 0, 3);
+    shapeRenderer.end();
   }
 
   public void resize(int width, int height){
