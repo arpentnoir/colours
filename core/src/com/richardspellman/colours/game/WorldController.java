@@ -95,19 +95,35 @@ public class WorldController extends InputAdapter {
   public boolean touchUp(int x, int y, int pointer, int button){
     float X = (x - (Gdx.graphics.getWidth() / 2)) / 60.0f;
     float Y = (y - (Gdx.graphics.getHeight() / 2)) / 60.0f;
-    for(int i = 0; i < level.columns.length; i++){
-
-      for(int j = 0; j < level.columns[i].circles.size(); j++){
-        Circle c = level.columns[i].circles.get(j);
-        Vector2 centre = new Vector2(c.getPosition().x + 0.5f, c.getPosition().y + 0.5f);
-        if(!c.equals(selectedCircle) && centre.dst(X, Y) < 0.5) {
-          System.out.println("selected circle's colour is: " + selectedCircle.colour + " other circle's colour is: " + c.colour);
-          // make set colour return false if can't set, then know when to return
-          if(c.setColour(c.colour * selectedCircle.colour)) {
-            selectedColumn.circles.remove(selectedCircle);
-            System.out.println(c.colour);
+    boolean intersectionFound = false;
+    if(selectedCircle != null) {
+      for (int i = 0; i < level.columns.length; i++) {
+        for (int j = 0; j < level.columns[i].circles.size(); j++) {
+          Circle c = level.columns[i].circles.get(j);
+          Vector2 centre = new Vector2(c.getPosition().x + 0.5f, c.getPosition().y + 0.5f);
+          if (!c.equals(selectedCircle) && centre.dst(X, Y) < 0.5) {
+            System.out.println("selected circle's colour is: " + selectedCircle.colour + " other circle's colour is: " + c.colour);
+            intersectionFound = true;
+            // make set colour return false if can't set, then know when to return
+            if (c.setColour(c.colour * selectedCircle.colour)) {
+              selectedColumn.circles.remove(selectedCircle);
+              System.out.println(c.colour);
+              break;
+            } else {
+              System.out.println("call to set colour failed, resetting selected circle's position");
+              selectedCircle.setPosition(new Vector2(startX, startY));
+              selectedCircle = null;
+              selectedColumn = null;
+              break;
+            }
           }
         }
+      }
+      if(intersectionFound == false){
+        System.out.println("no intersecting circle found, resetting selected circle's position");
+        selectedCircle.setPosition(new Vector2(startX, startY));
+        selectedCircle = null;
+        selectedColumn = null;
       }
     }
     return false;
