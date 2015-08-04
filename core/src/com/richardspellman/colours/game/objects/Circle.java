@@ -54,9 +54,12 @@ public class Circle extends Button{
         region.getRegionHeight(), false, false);
   }
 
-  public void setColour(int colour){
-    if(colour == 2 || colour == 3 || colour == 5 || colour == 6 || colour == 10 || colour == 15 || colour == 30) this.colour = colour;
-
+  public boolean setColour(int colour){
+    if(colour == 2 || colour == 3 || colour == 5 || colour == 6 || colour == 10 || colour == 15 || colour == 30) {
+      this.colour = colour;
+    } else {
+      return false;
+    }
     if(colour == 2){
       regCircle = Assets.instance.red.red;
     } else if(colour == 6){
@@ -69,9 +72,10 @@ public class Circle extends Button{
       regCircle = Assets.instance.blue.blue;
     } else if(colour == 10){
       regCircle = Assets.instance.purple.purple;
-    } else {
+    } else if(colour == 30){
       regCircle = Assets.instance.brown.brown;
     }
+    return true;
   }
 
   public Vector2 getPosition() {

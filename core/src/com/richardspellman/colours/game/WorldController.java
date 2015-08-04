@@ -103,9 +103,10 @@ public class WorldController extends InputAdapter {
         if(!c.equals(selectedCircle) && centre.dst(X, Y) < 0.5) {
           System.out.println("selected circle's colour is: " + selectedCircle.colour + " other circle's colour is: " + c.colour);
           // make set colour return false if can't set, then know when to return
-          c.setColour(c.colour * selectedCircle.colour);
-          selectedColumn.circles.remove(selectedCircle);
-          System.out.println(c.colour);
+          if(c.setColour(c.colour * selectedCircle.colour)) {
+            selectedColumn.circles.remove(selectedCircle);
+            System.out.println(c.colour);
+          }
         }
       }
     }
