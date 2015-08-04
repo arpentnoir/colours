@@ -16,6 +16,7 @@ import java.util.Random;
 public class Level {
   public Column[] columns;
   public ArrayList<Circle> components;
+  public int[] colours;
   Random random;
 
   public Level(String filename){
@@ -34,12 +35,13 @@ public class Level {
     columns = new Column[7];
     components = new ArrayList<Circle>();
     random = new Random();
+    colours = new int[] {2, 3, 5, 6, 10, 15, 30};
 
     for(int x = 0; x < 7; x++){
       Column c = new Column();
       columns[x] = c;
       for(int y = 0; y < 7; y++){
-        Circle circle = new Circle(new Vector2((x - 3.5f) * 1.05f, (y - 3.5f) * 1.05f), random.nextInt(7));
+        Circle circle = new Circle(new Vector2((x - 3.5f) * 1.05f, (y - 3.5f) * 1.05f), colours[random.nextInt(7)]);
         circle.rank = y;
         c.circles.add(circle);
 

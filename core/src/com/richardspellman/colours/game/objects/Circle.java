@@ -55,19 +55,19 @@ public class Circle extends Button{
   }
 
   public void setColour(int colour){
-    this.colour = colour;
+    if(colour == 2 || colour == 3 || colour == 5 || colour == 6 || colour == 10 || colour == 15 || colour == 30) this.colour = colour;
 
-    if(colour == 0){
+    if(colour == 2){
       regCircle = Assets.instance.red.red;
-    } else if(colour == 1){
+    } else if(colour == 6){
       regCircle = Assets.instance.orange.orange;
-    } else if(colour == 2){
-      regCircle = Assets.instance.yellow.yellow;
     } else if(colour == 3){
+      regCircle = Assets.instance.yellow.yellow;
+    } else if(colour == 15){
       regCircle = Assets.instance.green.green;
-    } else if(colour == 4){
-      regCircle = Assets.instance.blue.blue;
     } else if(colour == 5){
+      regCircle = Assets.instance.blue.blue;
+    } else if(colour == 10){
       regCircle = Assets.instance.purple.purple;
     } else {
       regCircle = Assets.instance.brown.brown;
