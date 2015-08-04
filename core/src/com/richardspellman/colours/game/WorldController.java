@@ -112,6 +112,7 @@ public class WorldController extends InputAdapter {
             } else {
               System.out.println("call to set colour failed, resetting selected circle's position");
               selectedCircle.setPosition(new Vector2(startX, startY));
+              selectedCircle.isSelected = false;
               selectedCircle = null;
               selectedColumn = null;
               break;
@@ -122,6 +123,7 @@ public class WorldController extends InputAdapter {
       if(intersectionFound == false){
         System.out.println("no intersecting circle found, resetting selected circle's position");
         selectedCircle.setPosition(new Vector2(startX, startY));
+        selectedCircle.isSelected = false;
         selectedCircle = null;
         selectedColumn = null;
       }
