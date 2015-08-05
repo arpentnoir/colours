@@ -106,11 +106,11 @@ public class WorldController extends InputAdapter {
             intersectionFound = true;
             // make set colour return false if can't set, then know when to return
             if (c.setColour(c.colour * selectedCircle.colour)) {
-              selectedColumn.circles.remove(selectedCircle);
-              System.out.println(c.colour);
+              selectedColumn.remove(selectedCircle);
+              //System.out.println(c.colour);
               break;
             } else {
-              System.out.println("call to set colour failed, resetting selected circle's position");
+              //System.out.println("call to set colour failed, resetting selected circle's position");
               selectedCircle.setPosition(new Vector2(startX, startY));
               selectedCircle.isSelected = false;
               selectedCircle = null;
@@ -121,13 +121,15 @@ public class WorldController extends InputAdapter {
         }
       }
       if(intersectionFound == false){
-        System.out.println("no intersecting circle found, resetting selected circle's position");
+        //System.out.println("no intersecting circle found, resetting selected circle's position");
         selectedCircle.setPosition(new Vector2(startX, startY));
         selectedCircle.isSelected = false;
         selectedCircle = null;
         selectedColumn = null;
       }
     }
+    level.checkColumns();
+    level.checkRows();
     return false;
   }
 
