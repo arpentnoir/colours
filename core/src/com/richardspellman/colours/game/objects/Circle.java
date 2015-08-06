@@ -23,25 +23,38 @@ public class Circle extends Button{
   public boolean isSelected;
   private Vector2 centre;
   public float rotation;
+  public boolean isShrinking;
+  boolean isMoving;
+
 
   private TextureRegion regCircle;
 
   public Circle(Vector2 position, int colour){
     super();
     dimension = new Vector2(1, 1);
-    origin = new Vector2(0, 0);
+    origin = new Vector2(0.5f, 0.5f);
     scale = new Vector2(1, 1);
     //centre = new Vector2(position.x + scale.x / 2f, position.y = scale.y / 2f);
     this.position = position;
     setColour(colour);
     isSelected = false;
-
+    isShrinking = false;
+    isMoving = false;
   }
 
-  public void update(){
+  public void update(float deltaTime){
     // kludgy, fix
     //centre = new Vector2(position.x + scale.x / 2f, position.y = scale.y / 2f);
-    if(!isSelected) position.y = ((7 - rank) - 3.5f) * 1.05f;
+    if(!isSelected && position.y != ((7 - rank) - 3.5f) * 1.05f){
+      isMoving = true;
+    }
+    if(isMoving && Math.abs(position.y - ((7 - rank) - 3.5f) * 1.05f) > 0.2){
+      position.y += 0.2;
+    } else if(Math.abs(position.y - ((7 - rank) - 3.5f) * 1.05f) <= 0.2){
+      position.y = ((7 - rank) - 3.5f) * 1.05f;
+      isMoving = false;
+    }
+    if(isShrinking) scale = new Vector2(scale.x * 0.9f, scale.y * 0.9f);
   }
 
   public void render(SpriteBatch batch){

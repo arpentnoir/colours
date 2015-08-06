@@ -16,8 +16,10 @@ import java.util.Random;
 public class Level {
   public Column[] columns;
   public ArrayList<Circle> components;
+  public ArrayList<Circle> removalQueue;
   public int[] colours;
   Random random;
+  int score;
 
   public Level(String filename){
     init(filename);
@@ -36,13 +38,14 @@ public class Level {
     components = new ArrayList<Circle>();
     random = new Random();
     colours = new int[] {2, 3, 5, 6, 10, 15, 30};
+    removalQueue = new ArrayList<Circle>();
 
     for(int x = 0; x < 7; x++){
       Column c = new Column();
       columns[x] = c;
       c.position = x;
       for(int y = 0; y < 7; y++){
-        Circle circle = new Circle(new Vector2((x - 3.5f) * 1.05f, (y - 3.5f) * 1.05f), colours[random.nextInt(7)]);
+        Circle circle = new Circle(new Vector2((x - 3.5f) * 1.05f, (7 - y - 3.5f) * 1.05f), colours[random.nextInt(7)]);
         circle.rank = y;
         c.circles.add(circle);
 
@@ -56,6 +59,9 @@ public class Level {
     int firstIndex;
     int lastIndex;
     for(int i = 0; i < columns.length; i++) {
+      //System.out.println("checking column " + i);
+      //System.out.println("column size is: " + columns.length);
+      count = 1;
       if (columns[i].circles.size() > 0) {
         previousColour = columns[i].circles.get(0).colour;
         firstIndex = 0;
@@ -64,6 +70,7 @@ public class Level {
           if (columns[i].circles.get(j).colour == previousColour) {
             count++;
             lastIndex = j;
+            //System.out.println("found repeat colour, incrementing count =  " + count);
           } else {
             if (count < 4) {
               count = 1;
@@ -77,8 +84,35 @@ public class Level {
         }
         if (count >= 4) {
           for (int j = firstIndex; j <= lastIndex; j++) {
-            System.out.println("start: " + firstIndex + " end: " + lastIndex);
-            columns[i].remove(firstIndex);
+            //System.out.println("start: " + firstIndex + " end: " + lastIndex);
+            removalQueue.add(columns[i].circles.get(j));
+            System.out.println("colour is: " + columns[i].circles.get(i).colour);
+            switch (columns[i].circles.get(i).colour){
+              case 2:
+                score += 4;
+                break;
+              case 3:
+                score += 4;
+                break;
+              case 5:
+                score += 4;
+                break;
+              case 6:
+                score += 2;
+                break;
+              case 10:
+                score += 2;
+                break;
+              case 15:
+                score += 2;
+                break;
+              case 30:
+                score++;
+                break;
+              default:
+                break;
+            }
+            System.out.println("Score: " + score);
           }
         }
       }
@@ -94,8 +128,9 @@ public class Level {
         previousColour = columns[0].circles.get(j).colour;
         firstIndex = 0;
         lastIndex = 0;
+        count = 1;
         for (int i = 1; i < columns.length; i++) {
-          System.out.println("checking column " + columns[i].position);
+          //System.out.println("checking column " + columns[i].position);
           if (columns[i].circles.get(j).colour == previousColour) {
             count++;
             lastIndex = i;
@@ -112,8 +147,34 @@ public class Level {
         }
         if (count >= 4) {
           for (int i = firstIndex; i <= lastIndex; i++) {
-            System.out.println("start: " + firstIndex + " end: " + lastIndex);
-            columns[i].remove(j);
+            //System.out.println("start: " + firstIndex + " end: " + lastIndex);
+            removalQueue.add(columns[i].circles.get(j));
+            switch (columns[i].circles.get(i).colour){
+              case 2:
+                score += 4;
+                break;
+              case 3:
+                score += 4;
+                break;
+              case 5:
+                score += 4;
+                break;
+              case 6:
+                score += 2;
+                break;
+              case 10:
+                score += 2;
+                break;
+              case 15:
+                score += 2;
+                break;
+              case 30:
+                score++;
+                break;
+              default:
+                break;
+            }
+            System.out.println("Score: " + score);
           }
         }
       }
@@ -123,7 +184,7 @@ public class Level {
     //checkRows();
     //checkColumns();
     for(Column c : columns){
-      c.update();
+      c.update(deltaTime);
     }
 
   }
