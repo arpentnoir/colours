@@ -1,6 +1,7 @@
 package com.richardspellman.colours.game;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.richardspellman.colours.game.objects.Circle;
 import com.richardspellman.colours.game.objects.Column;
@@ -21,11 +22,13 @@ public class Level {
   Random random;
   int score;
 
+
   public Level(String filename){
     init(filename);
   }
 
   public void render(SpriteBatch batch){
+
     for(Column c : columns){
       c.render(batch);
     }

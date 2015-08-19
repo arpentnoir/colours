@@ -2,6 +2,7 @@ package com.richardspellman.colours.game.objects;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -69,6 +70,7 @@ public class Circle extends Button{
 
   public void render(SpriteBatch batch){
     TextureRegion region = regCircle;
+    regCircle.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
     //if(colour.equals(COLOUR.RED)){
       //System.out.println("position before render is " + position);
     //}

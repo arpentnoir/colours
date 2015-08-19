@@ -48,13 +48,13 @@ public class WorldRenderer implements Disposable {
     cameraGUI.update();
 
     shapeRenderer = new ShapeRenderer();
-    shapeRenderer.setProjectionMatrix(camera.combined);
+    //shapeRenderer.setProjectionMatrix(camera.combined);
   }
 
   public void render(){
     renderWorld(batch);
     renderGui(batch);
-    //renderDebug(batch);
+    renderDebug(batch);
   }
 
   public void renderWorld(SpriteBatch batch){
@@ -67,8 +67,8 @@ public class WorldRenderer implements Disposable {
   }
 
   public void renderDebug(SpriteBatch batch){
-    shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-    shapeRenderer.line(0, -3, 0, 3);
+    shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+    shapeRenderer.circle(100, 100, 20);
     shapeRenderer.end();
   }
 
