@@ -1,5 +1,7 @@
 package com.richardspellman.colours.game.objects;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -8,6 +10,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.richardspellman.colours.util.Constants;
 import com.richardspellman.colours.util.Constants.COLOUR;
 import com.richardspellman.colours.util.Assets;
+
+import java.util.Random;
 
 
 /**
@@ -25,6 +29,8 @@ public class Circle extends Button{
   public float rotation;
   public boolean isShrinking;
   boolean isMoving;
+  public Sound sound;
+  Random random;
 
 
   private TextureRegion regCircle;
@@ -40,6 +46,10 @@ public class Circle extends Button{
     isSelected = false;
     isShrinking = false;
     isMoving = false;
+    random = new Random();
+    int r = random.nextInt(10) + 1;
+    sound = Gdx.audio.newSound(Gdx.files.internal("sounds/pop" + r +".wav"));
+
   }
 
   public void update(float deltaTime){

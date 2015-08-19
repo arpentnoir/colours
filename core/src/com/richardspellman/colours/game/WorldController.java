@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -38,6 +39,7 @@ public class WorldController extends InputAdapter {
   private boolean animate;
 
 
+
   private static final String TAG = WorldController.class.getName();
 
   public WorldController(Game game){
@@ -50,6 +52,8 @@ public class WorldController extends InputAdapter {
     cameraHelper = new CameraHelper();
     initLevel();
     animate = false;
+
+
   }
 
 

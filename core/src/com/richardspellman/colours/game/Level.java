@@ -86,6 +86,7 @@ public class Level {
           for (int j = firstIndex; j <= lastIndex; j++) {
             //System.out.println("start: " + firstIndex + " end: " + lastIndex);
             removalQueue.add(columns[i].circles.get(j));
+            columns[i].circles.get(j).sound.play();
             System.out.println("colour is: " + columns[i].circles.get(i).colour);
             switch (columns[i].circles.get(i).colour){
               case 2:
@@ -149,6 +150,7 @@ public class Level {
           for (int i = firstIndex; i <= lastIndex; i++) {
             //System.out.println("start: " + firstIndex + " end: " + lastIndex);
             removalQueue.add(columns[i].circles.get(j));
+            columns[i].circles.get(j).sound.play();
             switch (columns[i].circles.get(i).colour){
               case 2:
                 score += 4;

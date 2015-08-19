@@ -29,6 +29,7 @@ public class Column {
       circles.get(i).rank = i;
       circles.get(i).update(deltaTime);
       if(circles.get(i).scale.x < 0.2){
+        //circles.get(i).sound.play();
         remove(i);
         nextPosition++;
         System.out.println("calling remove, nextPosition  = " + nextPosition);
@@ -40,7 +41,7 @@ public class Column {
     Vector2 newPosition = new Vector2(circles.get(index).getPosition().x, (-nextPosition - 7f) * 1.05f);
     circles.remove(index);
     Circle circle = new Circle(newPosition, colours[random.nextInt(7)]);
-    System.out.println("creating circle with position " + circle.getPosition());
+    //System.out.println("creating circle with position " + circle.getPosition());
 
     circles.add(circle);
     //circle.rank = rank;
@@ -50,7 +51,7 @@ public class Column {
   public void remove(Circle circle){
     circles.remove(circle);
     int rank = circles.size();
-    System.out.println("creating circle with rank " + rank);
+    //System.out.println("creating circle with rank " + rank);
     Circle c = new Circle(new Vector2((position - 3.5f) * 1.05f, (-rank) * 1.05f), colours[random.nextInt(7)]);
     circles.add(c);
     c.rank = rank;
