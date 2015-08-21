@@ -46,7 +46,7 @@ public class MenuScreen extends AbstractGameScreen{
       sprite.draw(batch);
       batch.end();
     if(Gdx.input.getY() > 100){
-      Gdx.gl.glClearColor(205.0f / 255.0f, 200.0f / 255.0f, 177.0f / 255.0f, 255.0f / 255.0f);
+      Gdx.gl.glClearColor(252.0f / 255.0f, 252.0f / 255.0f, 252.0f / 255.0f, 255.0f / 255.0f);
       Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
       game.setScreen(new GameScreen(game));
     }

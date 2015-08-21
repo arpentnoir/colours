@@ -40,7 +40,7 @@ public class Circle extends Button{
     super();
     dimension = new Vector2(1, 1);
     origin = new Vector2(0.5f, 0.5f);
-    scale = new Vector2(1, 1);
+    scale = new Vector2(0.9f, 0.9f);
     //centre = new Vector2(position.x + scale.x / 2f, position.y = scale.y / 2f);
     this.position = position;
     setColour(colour);

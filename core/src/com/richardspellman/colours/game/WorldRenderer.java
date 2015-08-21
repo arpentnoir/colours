@@ -54,7 +54,7 @@ public class WorldRenderer implements Disposable {
   public void render(){
     renderWorld(batch);
     renderGui(batch);
-    renderDebug(batch);
+    //renderDebug(batch);
   }
 
   public void renderWorld(SpriteBatch batch){
