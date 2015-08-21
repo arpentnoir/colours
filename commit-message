@@ -1,0 +1,11 @@
+ColoursMain.java
+- removed image from libgdx setup process
+- removed commented out render method
+- set initial game mode to paused
+
+Circle.java
+- removed extends Button (i’d forgotten I was thinking this, but it was doing nothing)
+
+
+Button.java
+- created Button class for menu screen
