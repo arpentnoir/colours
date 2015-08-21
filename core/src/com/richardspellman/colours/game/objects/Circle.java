@@ -18,7 +18,7 @@ import java.util.Random;
 /**
  * Created by richardspellman on 2/08/15.
  */
-public class Circle extends Button{
+public class Circle{
   private Vector2 position;
   public Vector2 dimension;
   public Vector2 origin;

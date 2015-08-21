@@ -27,6 +27,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Window;
  * Created by richardspellman on 3/08/15.
  */
 public class MenuScreen extends AbstractGameScreen{
+
+
   Texture texture;
   SpriteBatch batch;
   Sprite sprite;

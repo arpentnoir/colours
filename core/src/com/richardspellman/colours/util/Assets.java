@@ -37,6 +37,7 @@ public class Assets implements Disposable, AssetErrorListener {
   public AssetBlue blue;
   public AssetPurple purple;
   public AssetBrown brown;
+  public AssetContinuousPlayButton continuousPlayButton;
 
   private AssetManager assetManager;
   // singleton: prevent instantiation from other classes
@@ -73,6 +74,7 @@ public class Assets implements Disposable, AssetErrorListener {
     blue = new AssetBlue(atlas);
     purple = new AssetPurple(atlas);
     brown = new AssetBrown(atlas);
+    continuousPlayButton = new AssetContinuousPlayButton(atlas);
   }
 
   @Override
@@ -157,6 +159,12 @@ public class Assets implements Disposable, AssetErrorListener {
     public AssetBrown(TextureAtlas atlas){
       brown = atlas.findRegion("brown");
     }
+  }
+
+  public class AssetContinuousPlayButton{
+    public final TextureAtlas.AtlasRegion continuousPlayButton;
+
+    public AssetContinuousPlayButton(TextureAtlas atlas) { continuousPlayButton = atlas.findRegion("continuousPlayButton");}
   }
 
 
