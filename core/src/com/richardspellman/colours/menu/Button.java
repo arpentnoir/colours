@@ -20,6 +20,9 @@ public class Button {
   private Vector2 dimension;
   private Vector2 origin;
   private Vector2 scale;
+  private String type;
+
+  private float rotation;
 
   private Vector2 centre;
 
@@ -28,19 +31,38 @@ public class Button {
 
   private TextureRegion regButton;
 
-  public Button(Vector2 position){
+  public Button(Vector2 position, String type){
     super();
     dimension = new Vector2(1, 1);
     origin = new Vector2(0.5f, 0.5f);
-    scale = new Vector2(0.9f, 0.9f);
+    scale = new Vector2(2, 2);
     this.position = position;
+    this.type = type;
+    centre = new Vector2(position.x + origin.x, position.y + origin.y);
 
-    //TODO: this just a placeholder until have a proper button image, will need to conditionally set button image
-    regButton = Assets.instance.continuousPlayButton.continuousPlayButton;
+  // TODO: each button should have a standard position based on it's type
 
+    if(type.equals("about")) {
+      regButton = Assets.instance.about.about;
+    } else if (type.equals("achievements")) {
+      regButton = Assets.instance.achievements.achievements;
+    } else if (type.equals("endless")) {
+      regButton = Assets.instance.endless.endless;
+    } else if (type.equals("moves")){
+      regButton = Assets.instance.moves.moves;
+    } else if (type.equals("powerup")){
+      regButton = Assets.instance.powerup.powerup;
+    } else if (type.equals("redButton")){
+      regButton = Assets.instance.redButton.redButton;
+    } else if (type.equals("settings")){
+      regButton = Assets.instance.settings.settings;
+    } else if (type.equals("timed")){
+      regButton = Assets.instance.timed.timed;
+    }
   }
 
   public void update(float deltaTime){
+    //rotation++;
   }
 
   public void render(SpriteBatch batch){
@@ -48,7 +70,7 @@ public class Button {
     regButton.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
     batch.draw(region.getTexture(), position.x, - position.y - 1, origin.x, origin.y, dimension.x, dimension.y, scale.x,
-        scale.y, 0, region.getRegionX(), region.getRegionY(), region.getRegionWidth(),
+        scale.y, rotation, region.getRegionX(), region.getRegionY(), region.getRegionWidth(),
         region.getRegionHeight(), false, false);
   }
 
@@ -66,6 +88,10 @@ public class Button {
 
   public void setCentre(Vector2 centre){
     this.centre = centre;
+  }
+
+  public String getType(){
+    return this.type;
   }
 }
 

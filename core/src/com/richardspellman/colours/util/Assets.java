@@ -85,10 +85,17 @@ public class Assets implements Disposable, AssetErrorListener {
     blue = new AssetBlue(atlas);
     purple = new AssetPurple(atlas);
     brown = new AssetBrown(atlas);
-    continuousPlayButton = new AssetContinuousPlayButton(atlas);
+
 
     // create menu resource objects
-
+    about = new AssetAbout(atlas);
+    achievements = new AssetAchievements(atlas);
+    endless = new AssetEndless(atlas);
+    moves = new AssetMoves(atlas);
+    powerup = new AssetPowerup(atlas);
+    redButton = new AssetRedButton(atlas);
+    settings = new AssetSettings(atlas);
+    timed = new AssetTimed(atlas);
   }
 
   @Override

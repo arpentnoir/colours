@@ -7,8 +7,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.richardspellman.colours.game.WorldController;
+import com.richardspellman.colours.game.WorldRenderer;
 import com.richardspellman.colours.menu.Button;
 import com.richardspellman.colours.util.Assets;
+import com.richardspellman.colours.menu.MenuController;
+import com.richardspellman.colours.menu.MenuRenderer;
+
 
 
 /**
@@ -17,59 +22,52 @@ import com.richardspellman.colours.util.Assets;
 public class MenuScreen extends AbstractGameScreen{
 
 
-  Texture texture;
-  SpriteBatch batch;
-  Sprite sprite;
-  boolean paused;
-  private Button continuousPlayButton;
+    private MenuController menuController;
+    private MenuRenderer menuRenderer;
 
-  public MenuScreen(Game game){
-    super(game);
-    texture = new Texture("images/start_screen.png");
-    batch = new SpriteBatch();
-    sprite = new Sprite(texture);
-    paused = true;
-    continuousPlayButton = new Button(new Vector2(100, 100));
-  }
+    private boolean paused;
 
-  @Override
-  public void render(float deltaTime) {
 
-    batch.begin();
-      sprite.draw(batch);
-      //continuousPlayButton.render(batch);
-      batch.end();
-    if(Gdx.input.getY() > 100){
-      Gdx.gl.glClearColor(252.0f / 255.0f, 252.0f / 255.0f, 252.0f / 255.0f, 255.0f / 255.0f);
-      Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-      game.setScreen(new GameScreen(game));
+    public MenuScreen(Game game){
+      super(game);
+    }
+
+    @Override
+    public void render(float deltaTime) {
+        menuController.update(deltaTime);
+        Gdx.gl.glClearColor(245.0f / 255.0f, 245.0f / 255.0f, 245.0f / 255.0f, 255.0f / 255.0f);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        menuRenderer.render();
+    }
+
+    @Override
+    public void resize(int width, int height) {
+      menuRenderer.resize(width, height);
+    }
+
+    @Override
+    public void show() {
+      menuController = new MenuController(game);
+      menuRenderer = new MenuRenderer(menuController);
+      Gdx.input.setCatchBackKey(true);
+
+    }
+
+    @Override
+    public void hide() {
+      menuRenderer.dispose();
+      Gdx.input.setCatchBackKey(false);
+
+    }
+
+    @Override
+    public void pause() {
+      paused = true;
+    }
+
+    @Override
+    public void resume(){
+      super.resume();
+      paused = false;
     }
   }
-
-  @Override
-  public void resize(int width, int height) {
-
-  }
-
-  @Override
-  public void show() {
-
-  }
-
-  @Override
-  public void hide() {
-
-  }
-
-  @Override
-  public void pause() {
-
-  }
-
-  @Override
-  public void dispose(){
-    Assets.instance.dispose();
-    batch.dispose();
-    texture.dispose();
-  }
-}

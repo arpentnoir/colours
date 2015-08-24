@@ -3,79 +3,79 @@ blurry1.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-yellow
+about
   rotate: false
   xy: 2, 2
+  size: 260, 260
+  orig: 260, 260
+  offset: 0, 0
+  index: -1
+yellow
+  rotate: false
+  xy: 264, 2
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
   index: -1
 timed
   rotate: false
-  xy: 260, 2
+  xy: 522, 2
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
   index: -1
 settings
   rotate: false
-  xy: 518, 2
+  xy: 2, 264
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
   index: -1
 red
   rotate: false
-  xy: 2, 260
+  xy: 2, 522
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
   index: -1
-redbutton
+redButton
   rotate: false
-  xy: 2, 260
+  xy: 2, 522
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
   index: -1
 purple
   rotate: false
-  xy: 2, 518
+  xy: 260, 264
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
   index: -1
 powerup
   rotate: false
-  xy: 260, 260
+  xy: 260, 522
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
   index: -1
 orange
   rotate: false
-  xy: 518, 260
+  xy: 518, 264
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
   index: -1
 moves
   rotate: false
-  xy: 260, 518
-  size: 256, 256
-  orig: 256, 256
-  offset: 0, 0
-  index: -1
-grey
-  rotate: false
-  xy: 518, 518
+  xy: 518, 522
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
   index: -1
 button
   rotate: false
-  xy: 776, 2
+  xy: 780, 2
   size: 82, 40
   orig: 82, 40
   offset: 0, 0
@@ -85,42 +85,42 @@ blurry2.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-green
+grey
   rotate: false
   xy: 2, 2
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
   index: -1
-endless
+green
   rotate: false
   xy: 260, 2
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
   index: -1
-brown
+endless
   rotate: false
   xy: 518, 2
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
   index: -1
-blue
+brown
   rotate: false
   xy: 2, 260
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
   index: -1
-achievements
+blue
   rotate: false
   xy: 2, 518
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
   index: -1
-about
+achievements
   rotate: false
   xy: 260, 260
   size: 256, 256
