@@ -28,7 +28,7 @@ public class Button {
 
   private TextureRegion regButton;
 
-  public Button(Vector2 position, int colour){
+  public Button(Vector2 position){
     super();
     dimension = new Vector2(1, 1);
     origin = new Vector2(0.5f, 0.5f);

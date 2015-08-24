@@ -20,6 +20,8 @@ import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.richardspellman.colours.util.Constants;
 
+import java.awt.font.TextAttribute;
+
 /**
  * Created by richardspellman on 31/07/15.
  */
@@ -38,6 +40,15 @@ public class Assets implements Disposable, AssetErrorListener {
   public AssetPurple purple;
   public AssetBrown brown;
   public AssetContinuousPlayButton continuousPlayButton;
+
+  public AssetAbout about;
+  public AssetAchievements achievements;
+  public AssetEndless endless;
+  public AssetMoves moves;
+  public AssetPowerup powerup;
+  public AssetRedButton redButton;
+  public AssetSettings settings;
+  public AssetTimed timed;
 
   private AssetManager assetManager;
   // singleton: prevent instantiation from other classes
@@ -75,6 +86,9 @@ public class Assets implements Disposable, AssetErrorListener {
     purple = new AssetPurple(atlas);
     brown = new AssetBrown(atlas);
     continuousPlayButton = new AssetContinuousPlayButton(atlas);
+
+    // create menu resource objects
+
   }
 
   @Override
@@ -166,6 +180,67 @@ public class Assets implements Disposable, AssetErrorListener {
 
     public AssetContinuousPlayButton(TextureAtlas atlas) { continuousPlayButton = atlas.findRegion("continuousPlayButton");}
   }
+
+  // *** Menu Assets ***
+
+  // ABOUT
+  public class AssetAbout{
+    public final TextureAtlas.AtlasRegion about;
+
+    public AssetAbout(TextureAtlas atlas) { about = atlas.findRegion("about");}
+  }
+
+  // ACHIEVEMENTS
+  public class AssetAchievements{
+    public final TextureAtlas.AtlasRegion achievements;
+
+    public AssetAchievements(TextureAtlas atlas) { achievements = atlas.findRegion("achievements");}
+  }
+
+  // ENDLESS
+  public class AssetEndless{
+    public final TextureAtlas.AtlasRegion endless;
+
+    public AssetEndless(TextureAtlas atlas) { endless = atlas.findRegion("endless");}
+  }
+
+  // MOVES
+  public class AssetMoves {
+    public final TextureAtlas.AtlasRegion moves;
+
+    public AssetMoves(TextureAtlas atlas) {moves = atlas.findRegion("moves");}
+  }
+  // POWERUP
+  public class AssetPowerup{
+    public final TextureAtlas.AtlasRegion powerup;
+
+    public AssetPowerup(TextureAtlas atlas) {powerup = atlas.findRegion("powerup");}
+  }
+
+  // RED BUTTON
+  public class AssetRedButton{
+    public final TextureAtlas.AtlasRegion redButton;
+
+    public AssetRedButton(TextureAtlas atlas) {redButton = atlas.findRegion("redButton");}
+  }
+
+  // SETTINGS
+  public class AssetSettings{
+    public final TextureAtlas.AtlasRegion settings;
+
+    public AssetSettings(TextureAtlas atlas) {settings = atlas.findRegion("settings");}
+  }
+
+  // TIMED
+  public class AssetTimed{
+    public final TextureAtlas.AtlasRegion timed;
+
+    public AssetTimed(TextureAtlas atlas) {timed = atlas.findRegion("timed");}
+  }
+
+
+
+
 
 
   public class AssetLevelDecoration{

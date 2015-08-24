@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.richardspellman.colours.game.WorldController;
 import com.richardspellman.colours.game.WorldRenderer;
+import com.richardspellman.colours.game.screens.GameScreen;
 import com.richardspellman.colours.game.screens.MenuScreen;
 import com.richardspellman.colours.util.Assets;
 

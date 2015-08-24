@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.richardspellman.colours.game.objects.Circle;
 import com.richardspellman.colours.game.objects.Column;
+import com.richardspellman.colours.menu.Button;
 import com.richardspellman.colours.util.Constants;
 
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ public class Level {
   public int[] colours;
   Random random;
   int score;
+  Button continuousPlayButton;
 
 
   public Level(String filename){
@@ -29,6 +31,7 @@ public class Level {
 
   public void render(SpriteBatch batch){
 
+    continuousPlayButton.render(batch);
     for(Column c : columns){
       c.render(batch);
     }
@@ -42,6 +45,8 @@ public class Level {
     random = new Random();
     colours = new int[] {2, 3, 5, 6, 10, 15, 30};
     removalQueue = new ArrayList<Circle>();
+    continuousPlayButton = new Button(new Vector2(0, 0));
+
 
     for(int x = 0; x < 7; x++){
       Column c = new Column();

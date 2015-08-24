@@ -6,22 +6,10 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
+import com.richardspellman.colours.menu.Button;
 import com.richardspellman.colours.util.Assets;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
-import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Slider;
-import com.badlogic.gdx.scenes.scene2d.ui.Stack;
-import com.badlogic.gdx.scenes.scene2d.ui.Stack;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Window;
+
 
 /**
  * Created by richardspellman on 3/08/15.
@@ -33,6 +21,7 @@ public class MenuScreen extends AbstractGameScreen{
   SpriteBatch batch;
   Sprite sprite;
   boolean paused;
+  private Button continuousPlayButton;
 
   public MenuScreen(Game game){
     super(game);
@@ -40,12 +29,15 @@ public class MenuScreen extends AbstractGameScreen{
     batch = new SpriteBatch();
     sprite = new Sprite(texture);
     paused = true;
+    continuousPlayButton = new Button(new Vector2(100, 100));
   }
 
   @Override
   public void render(float deltaTime) {
-      batch.begin();
+
+    batch.begin();
       sprite.draw(batch);
+      //continuousPlayButton.render(batch);
       batch.end();
     if(Gdx.input.getY() > 100){
       Gdx.gl.glClearColor(252.0f / 255.0f, 252.0f / 255.0f, 252.0f / 255.0f, 255.0f / 255.0f);
