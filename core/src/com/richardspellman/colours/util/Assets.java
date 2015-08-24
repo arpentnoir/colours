@@ -32,6 +32,7 @@ public class Assets implements Disposable, AssetErrorListener {
 
   public static final Assets instance = new Assets();
 
+  // game assets
   public AssetRed red;
   public AssetOrange orange;
   public AssetYellow yellow;
@@ -41,6 +42,7 @@ public class Assets implements Disposable, AssetErrorListener {
   public AssetBrown brown;
   public AssetContinuousPlayButton continuousPlayButton;
 
+  // menu assets
   public AssetAbout about;
   public AssetAchievements achievements;
   public AssetEndless endless;
@@ -49,6 +51,34 @@ public class Assets implements Disposable, AssetErrorListener {
   public AssetRedButton redButton;
   public AssetSettings settings;
   public AssetTimed timed;
+
+  // ui assets
+  //public AssetCheckOff checkOff;
+  //public AssetTextField textField;
+  //public AssetCheckOn checkOn;
+  //public AssetCursor  cursor;
+  //public AseetDefault assDefault;
+  //public AssetDefaultPane defaultPane;
+  //public AssetDefaultRectPad defaultRectPad;
+  //public AssetDefaultPaneNoborder defaultPaneNoborder;
+  //public AssetDefaultRect defaultRect;
+  //public AssetDefaultRectDown defaultRectDown;
+  public AssetDefaultRound defaultRound;
+  public AssetDefaultRoundDown defaultRoundDown;
+  //public AssetDefaultRoundLarge defaultRoundLarge;
+  //public AssetDefaultScroll defaultScroll;
+  //public AssetDefaultSelect defaultSelect;
+  //public AssetDefaultSelectSelection defaultSelectSelection;
+  //public AssetDefaultSlider defaultSlider;
+  //public AssetDefaultSliderKnob defaultSliderKnob;
+  //public AssetDefaultSplitPane defaultSplitpane;
+  //public AssetDefaultSpliPaneVertical defaultSplitpaneVertical;
+  //public AssetDefaultWindow defaultWindow;
+  //public AssetSelection selection;
+  //public AssetTreeMinus treeMinus;
+  //public AssetTreePlus treePlus;
+  //public AssetWhite white;
+
 
   private AssetManager assetManager;
   // singleton: prevent instantiation from other classes
@@ -96,6 +126,10 @@ public class Assets implements Disposable, AssetErrorListener {
     redButton = new AssetRedButton(atlas);
     settings = new AssetSettings(atlas);
     timed = new AssetTimed(atlas);
+
+    // create ui skin resource objects
+    defaultRound = new AssetDefaultRound(atlas);
+    defaultRoundDown = new AssetDefaultRoundDown(atlas);
   }
 
   @Override
@@ -246,7 +280,21 @@ public class Assets implements Disposable, AssetErrorListener {
   }
 
 
+// *** UI Assets ***
 
+// Default Round
+  public class AssetDefaultRound{
+    public final TextureAtlas.AtlasRegion defaultRound;
+
+  public AssetDefaultRound(TextureAtlas atlas) {defaultRound = atlas.findRegion("default-round");}
+}
+  // Default Round Down
+  public class AssetDefaultRoundDown{
+    public final TextureAtlas.AtlasRegion defaultRoundDown;
+
+    public AssetDefaultRoundDown(TextureAtlas atlas) {defaultRoundDown = atlas.findRegion("default-round-down");}
+
+  }
 
 
 

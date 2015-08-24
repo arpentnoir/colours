@@ -11,6 +11,7 @@ import com.richardspellman.colours.game.objects.Circle;
 import com.richardspellman.colours.game.objects.Column;
 import com.richardspellman.colours.game.screens.GameScreen;
 import com.richardspellman.colours.game.screens.MenuScreen;
+import com.richardspellman.colours.game.screens.SettingsScreen;
 import com.richardspellman.colours.util.CameraHelper;
 import com.richardspellman.colours.util.Constants;
 
@@ -113,6 +114,8 @@ public class MenuController extends InputAdapter{
   public void open(String type){
     if(type.equals("timed")){
       game.setScreen(new GameScreen(game));
+    } else if(type.equals("settings")){
+      game.setScreen(new SettingsScreen(game));
     }
   }
 
