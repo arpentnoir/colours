@@ -83,7 +83,7 @@ public class WorldController extends InputAdapter {
     if(y < 100) {
       game.setScreen(new MenuScreen(game));
     }
-    if(!animate) {
+    if(!animate && selectedCircle == null && pointer == 0) {
       float X = (x - (Gdx.graphics.getWidth() / 2)) / Constants.PIXELS_TO_METERS;
       float Y = (y - (Gdx.graphics.getHeight() / 2)) / Constants.PIXELS_TO_METERS;
       for (int i = 0; i < level.columns.length; i++) {
@@ -115,7 +115,7 @@ public class WorldController extends InputAdapter {
       float X = (x - (Gdx.graphics.getWidth() / 2)) / Constants.PIXELS_TO_METERS;
       float Y = (y - (Gdx.graphics.getHeight() / 2)) / Constants.PIXELS_TO_METERS;
       boolean intersectionFound = false;
-      if (selectedCircle != null) {
+      if (selectedCircle != null && pointer == 0) {
         for (int i = 0; i < level.columns.length; i++) {
           for (int j = 0; j < level.columns[i].circles.size(); j++) {
             Circle c = level.columns[i].circles.get(j);
@@ -165,7 +165,7 @@ public class WorldController extends InputAdapter {
 
   @Override
   public boolean touchDragged(int x, int y, int pointer){
-    if(selectedCircle != null && !animate){
+    if(selectedCircle != null && !animate && pointer == 0){
       selectedCircle.setPosition(new Vector2((x - (Gdx.graphics.getWidth() / 2)) / Constants.PIXELS_TO_METERS - deltaX, (y - (Gdx.graphics.getHeight() / 2)) / Constants.PIXELS_TO_METERS - deltaY));
     }
 
