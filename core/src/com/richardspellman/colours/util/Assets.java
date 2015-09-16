@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetErrorListener;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -42,6 +43,9 @@ public class Assets implements Disposable, AssetErrorListener {
   public AssetBrown brown;
   public AssetContinuousPlayButton continuousPlayButton;
 
+  public AssetFonts fonts;
+
+
   // menu assets
   public AssetAbout about;
   public AssetAchievements achievements;
@@ -53,31 +57,31 @@ public class Assets implements Disposable, AssetErrorListener {
   public AssetTimed timed;
 
   // ui assets
-  //public AssetCheckOff checkOff;
-  //public AssetTextField textField;
-  //public AssetCheckOn checkOn;
-  //public AssetCursor  cursor;
-  //public AseetDefault assDefault;
-  //public AssetDefaultPane defaultPane;
-  //public AssetDefaultRectPad defaultRectPad;
-  //public AssetDefaultPaneNoborder defaultPaneNoborder;
-  //public AssetDefaultRect defaultRect;
-  //public AssetDefaultRectDown defaultRectDown;
+  public AssetCheckOff checkOff;
+  public AssetTextField textField;
+  public AssetCheckOn checkOn;
+  public AssetCursor  cursor;
+  public AssetDefault assDefault;
+  public AssetDefaultPane defaultPane;
+  public AssetDefaultRectPad defaultRectPad;
+  public AssetDefaultPaneNoborder defaultPaneNoborder;
+  public AssetDefaultRect defaultRect;
+  public AssetDefaultRectDown defaultRectDown;
   public AssetDefaultRound defaultRound;
   public AssetDefaultRoundDown defaultRoundDown;
-  //public AssetDefaultRoundLarge defaultRoundLarge;
-  //public AssetDefaultScroll defaultScroll;
-  //public AssetDefaultSelect defaultSelect;
-  //public AssetDefaultSelectSelection defaultSelectSelection;
-  //public AssetDefaultSlider defaultSlider;
-  //public AssetDefaultSliderKnob defaultSliderKnob;
-  //public AssetDefaultSplitPane defaultSplitpane;
-  //public AssetDefaultSpliPaneVertical defaultSplitpaneVertical;
-  //public AssetDefaultWindow defaultWindow;
-  //public AssetSelection selection;
-  //public AssetTreeMinus treeMinus;
-  //public AssetTreePlus treePlus;
-  //public AssetWhite white;
+  public AssetDefaultRoundLarge defaultRoundLarge;
+  public AssetDefaultScroll defaultScroll;
+  public AssetDefaultSelect defaultSelect;
+  public AssetDefaultSelectSelection defaultSelectSelection;
+  public AssetDefaultSlider defaultSlider;
+  public AssetDefaultSliderKnob defaultSliderKnob;
+  public AssetDefaultSplitPane defaultSplitpane;
+  public AssetDefaultSplitPaneVertical defaultSplitpaneVertical;
+  public AssetDefaultWindow defaultWindow;
+  public AssetSelection selection;
+  public AssetTreeMinus treeMinus;
+  public AssetTreePlus treePlus;
+  public AssetWhite white;
 
 
   private AssetManager assetManager;
@@ -116,6 +120,8 @@ public class Assets implements Disposable, AssetErrorListener {
     purple = new AssetPurple(atlas);
     brown = new AssetBrown(atlas);
 
+    fonts = new AssetFonts();
+
 
     // create menu resource objects
     about = new AssetAbout(atlas);
@@ -128,8 +134,31 @@ public class Assets implements Disposable, AssetErrorListener {
     timed = new AssetTimed(atlas);
 
     // create ui skin resource objects
+    checkOff = new AssetCheckOff(atlas);
+    textField = new AssetTextField(atlas);
+    checkOn = new AssetCheckOn(atlas);
+    cursor = new AssetCursor (atlas);
+    assDefault = new AssetDefault(atlas);
+    defaultPane = new AssetDefaultPane(atlas);
+    defaultRectPad = new AssetDefaultRectPad(atlas);
+    defaultPaneNoborder = new AssetDefaultPaneNoborder(atlas);
+    defaultRect = new AssetDefaultRect(atlas);
+    defaultRectDown = new AssetDefaultRectDown(atlas);
     defaultRound = new AssetDefaultRound(atlas);
     defaultRoundDown = new AssetDefaultRoundDown(atlas);
+    defaultRoundLarge = new AssetDefaultRoundLarge(atlas);
+    defaultScroll = new AssetDefaultScroll(atlas);
+    defaultSelect = new AssetDefaultSelect(atlas);
+    defaultSelectSelection = new AssetDefaultSelectSelection(atlas);
+    defaultSlider = new AssetDefaultSlider(atlas);
+    defaultSliderKnob = new AssetDefaultSliderKnob(atlas);
+    defaultSplitpane = new AssetDefaultSplitPane(atlas);
+    defaultSplitpaneVertical = new AssetDefaultSplitPaneVertical(atlas);
+    defaultWindow = new AssetDefaultWindow(atlas);
+    selection = new AssetSelection(atlas);
+    treeMinus = new AssetTreeMinus(atlas);
+    treePlus = new AssetTreePlus(atlas);
+    white = new AssetWhite(atlas);
   }
 
   @Override
@@ -282,6 +311,66 @@ public class Assets implements Disposable, AssetErrorListener {
 
 // *** UI Assets ***
 
+  public class AssetCheckOff{
+    public final TextureAtlas.AtlasRegion checkOff;
+
+    public AssetCheckOff(TextureAtlas atlas) {checkOff = atlas.findRegion("check-off");}
+  }
+
+  public class AssetTextField{
+    public final TextureAtlas.AtlasRegion textField;
+
+    public AssetTextField(TextureAtlas atlas) {textField = atlas.findRegion("textfield");}
+  }
+
+  public class AssetCheckOn{
+    public final TextureAtlas.AtlasRegion checkOn;
+
+    public AssetCheckOn(TextureAtlas atlas) {checkOn = atlas.findRegion("check-on");}
+  }
+
+  public class AssetCursor{
+    public final TextureAtlas.AtlasRegion cursor;
+
+    public AssetCursor(TextureAtlas atlas) {cursor = atlas.findRegion("cursor");}
+  }
+
+  public class AssetDefault{
+    public final TextureAtlas.AtlasRegion assDefault;
+
+    public AssetDefault(TextureAtlas atlas) {assDefault = atlas.findRegion("default");}
+  }
+
+  public class AssetDefaultPane{
+    public final TextureAtlas.AtlasRegion defaultPane;
+
+    public AssetDefaultPane(TextureAtlas atlas) {defaultPane = atlas.findRegion("default-pane");}
+  }
+
+  public class AssetDefaultRectPad{
+    public final TextureAtlas.AtlasRegion defaultRectPad;
+
+    public AssetDefaultRectPad(TextureAtlas atlas) {defaultRectPad = atlas.findRegion("default-rect-pad");}
+  }
+
+  public class AssetDefaultPaneNoborder{
+    public final TextureAtlas.AtlasRegion defaultPaneNoborder;
+
+    public AssetDefaultPaneNoborder(TextureAtlas atlas) {defaultPaneNoborder = atlas.findRegion("default-pane-noborder");}
+  }
+
+  public class AssetDefaultRect{
+    public final TextureAtlas.AtlasRegion defaultRect;
+
+    public AssetDefaultRect(TextureAtlas atlas) {defaultRect = atlas.findRegion("default-rect");}
+  }
+
+  public class AssetDefaultRectDown{
+    public final TextureAtlas.AtlasRegion defaultRectDown;
+
+    public AssetDefaultRectDown(TextureAtlas atlas) {defaultRectDown = atlas.findRegion("default-rect-down");}
+  }
+
 // Default Round
   public class AssetDefaultRound{
     public final TextureAtlas.AtlasRegion defaultRound;
@@ -293,7 +382,84 @@ public class Assets implements Disposable, AssetErrorListener {
     public final TextureAtlas.AtlasRegion defaultRoundDown;
 
     public AssetDefaultRoundDown(TextureAtlas atlas) {defaultRoundDown = atlas.findRegion("default-round-down");}
+  }
 
+  public class AssetDefaultRoundLarge{
+    public final TextureAtlas.AtlasRegion defaultRoundLarge;
+
+    public AssetDefaultRoundLarge(TextureAtlas atlas) {defaultRoundLarge = atlas.findRegion("default-round-large");}
+  }
+
+  public class AssetDefaultScroll{
+    public final TextureAtlas.AtlasRegion defaultScroll;
+
+    public AssetDefaultScroll(TextureAtlas atlas) {defaultScroll = atlas.findRegion("default-scroll");}
+  }
+
+  public class AssetDefaultSelect{
+    public final TextureAtlas.AtlasRegion defaultSelect;
+
+    public AssetDefaultSelect(TextureAtlas atlas) {defaultSelect = atlas.findRegion("default-select");}
+  }
+
+  public class AssetDefaultSelectSelection{
+    public final TextureAtlas.AtlasRegion defaultSelectSelection;
+
+    public AssetDefaultSelectSelection(TextureAtlas atlas) {defaultSelectSelection = atlas.findRegion("default-select-selection");}
+  }
+
+  public class AssetDefaultSlider {
+    public final TextureAtlas.AtlasRegion defaultSlider;
+
+    public AssetDefaultSlider(TextureAtlas atlas) {defaultSlider = atlas.findRegion("default-slider");}
+  }
+
+  public class AssetDefaultSliderKnob{
+    public final TextureAtlas.AtlasRegion defaultSliderKnob;
+
+    public AssetDefaultSliderKnob(TextureAtlas atlas) {defaultSliderKnob = atlas.findRegion("default-slider-knob");}
+  }
+
+  public class AssetDefaultSplitPane{
+    public final TextureAtlas.AtlasRegion defaultSplitpane;
+
+    public AssetDefaultSplitPane(TextureAtlas atlas) {defaultSplitpane = atlas.findRegion("default-splitpane");}
+  }
+
+  public class AssetDefaultSplitPaneVertical{
+    public final TextureAtlas.AtlasRegion defaultSplitpaneVertical;
+
+    public AssetDefaultSplitPaneVertical(TextureAtlas atlas) {defaultSplitpaneVertical = atlas.findRegion("default-splitpane-vertical");}
+  }
+
+  public class AssetDefaultWindow{
+    public final TextureAtlas.AtlasRegion defaultWindow;
+
+    public AssetDefaultWindow(TextureAtlas atlas) {defaultWindow = atlas.findRegion("default-window");}
+  }
+
+  public class AssetSelection{
+    public final TextureAtlas.AtlasRegion selection;
+
+    public AssetSelection(TextureAtlas atlas) {selection = atlas.findRegion("selection");}
+  }
+
+  public class AssetTreeMinus{
+    public final TextureAtlas.AtlasRegion treeMinus;
+
+    public AssetTreeMinus(TextureAtlas atlas) {treeMinus = atlas.findRegion("tree-minus");}
+  }
+
+  public class AssetTreePlus{
+    public final TextureAtlas.AtlasRegion treePlus;
+
+    public AssetTreePlus(TextureAtlas atlas) {treePlus = atlas.findRegion("tree-plus");}
+  }
+
+  public class AssetWhite{
+    public final TextureAtlas.AtlasRegion white;
+
+    public AssetWhite(TextureAtlas atlas) {white = atlas.findRegion("white");}
   }
 
 
@@ -325,6 +491,17 @@ public class Assets implements Disposable, AssetErrorListener {
       defaultSmall.getRegion().getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
       defaultNormal.getRegion().getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
       defaultBig.getRegion().getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+
+
+        FileHandle fontFile = Gdx.files.internal("Roboto-Bold.ttf");
+        //FreeTypeFontGenerator generator = new FreeTypeFontGenerator(fontFile);
+        //FreeTypeFontParameter parameter = new FreeTypeFontParameter();
+        //parameter.size = 12;
+        //textFont = generator.generateFont(parameter);
+        //parameter.size = 24;
+        //titleFont = generator.generateFont(parameter);
+        //generator.dispose();
     }
   }
 

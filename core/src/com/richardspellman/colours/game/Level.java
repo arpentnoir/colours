@@ -1,8 +1,10 @@
 package com.richardspellman.colours.game;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Timer;
 import com.richardspellman.colours.game.objects.Circle;
 import com.richardspellman.colours.game.objects.Column;
 import com.richardspellman.colours.menu.Button;
@@ -22,6 +24,8 @@ public class Level {
   public int[] colours;
   Random random;
   int score;
+  private boolean timerOn = false;
+  float time = 60;
 
 
   public Level(String filename){
@@ -36,6 +40,10 @@ public class Level {
     for(Circle c : components){
       c.render(batch);
     }
+
+    float deltaTime = Gdx.graphics.getDeltaTime();
+    time -= deltaTime;
+
   }
   public void init(String filename){
     columns = new Column[7];
@@ -43,6 +51,7 @@ public class Level {
     random = new Random();
     colours = new int[] {2, 3, 5, 6, 10, 15, 30};
     removalQueue = new ArrayList<Circle>();
+
 
 
     for(int x = 0; x < 7; x++){
@@ -64,8 +73,6 @@ public class Level {
     int firstIndex;
     int lastIndex;
     for(int i = 0; i < columns.length; i++) {
-      //System.out.println("checking column " + i);
-      //System.out.println("column size is: " + columns.length);
       count = 1;
       if (columns[i].circles.size() > 0) {
         previousColour = columns[i].circles.get(0).colour;
@@ -75,7 +82,6 @@ public class Level {
           if (columns[i].circles.get(j).colour == previousColour) {
             count++;
             lastIndex = j;
-            //System.out.println("found repeat colour, incrementing count =  " + count);
           } else {
             if (count < 4) {
               count = 1;
@@ -89,10 +95,8 @@ public class Level {
         }
         if (count >= 4) {
           for (int j = firstIndex; j <= lastIndex; j++) {
-            //System.out.println("start: " + firstIndex + " end: " + lastIndex);
             removalQueue.add(columns[i].circles.get(j));
             columns[i].circles.get(j).sound.play();
-            System.out.println("colour is: " + columns[i].circles.get(i).colour);
             switch (columns[i].circles.get(i).colour){
               case 2:
                 score += 4;
@@ -113,12 +117,11 @@ public class Level {
                 score += 2;
                 break;
               case 30:
-                score++;
+                time += 5;
                 break;
               default:
                 break;
             }
-            System.out.println("Score: " + score);
           }
         }
       }
@@ -136,7 +139,6 @@ public class Level {
         lastIndex = 0;
         count = 1;
         for (int i = 1; i < columns.length; i++) {
-          //System.out.println("checking column " + columns[i].position);
           if (columns[i].circles.get(j).colour == previousColour) {
             count++;
             lastIndex = i;
@@ -153,7 +155,6 @@ public class Level {
         }
         if (count >= 4) {
           for (int i = firstIndex; i <= lastIndex; i++) {
-            //System.out.println("start: " + firstIndex + " end: " + lastIndex);
             removalQueue.add(columns[i].circles.get(j));
             columns[i].circles.get(j).sound.play();
             switch (columns[i].circles.get(i).colour){
@@ -176,12 +177,11 @@ public class Level {
                 score += 2;
                 break;
               case 30:
-                score++;
+                time += 5;
                 break;
               default:
                 break;
             }
-            System.out.println("Score: " + score);
           }
         }
       }

@@ -32,7 +32,7 @@ public class Column {
         //circles.get(i).sound.play();
         remove(i);
         nextPosition++;
-        System.out.println("calling remove, nextPosition  = " + nextPosition);
+
       }
     }
   }
@@ -41,21 +41,16 @@ public class Column {
     Vector2 newPosition = new Vector2(circles.get(index).getPosition().x, (-nextPosition - 7f) * 1.05f);
     circles.remove(index);
     Circle circle = new Circle(newPosition, colours[random.nextInt(7)]);
-    //System.out.println("creating circle with position " + circle.getPosition());
 
     circles.add(circle);
-    //circle.rank = rank;
-    //System.out.println("circle size: " + circles.size());
   }
 
   public void remove(Circle circle){
     circles.remove(circle);
     int rank = circles.size();
-    //System.out.println("creating circle with rank " + rank);
     Circle c = new Circle(new Vector2((position - 3.5f) * 1.05f, (-rank) * 1.05f), colours[random.nextInt(7)]);
     circles.add(c);
     c.rank = rank;
-    //System.out.println("circle size: " + circles.size());
   }
 
   public void render(SpriteBatch batch){

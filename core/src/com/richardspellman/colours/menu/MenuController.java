@@ -24,7 +24,15 @@ public class MenuController extends InputAdapter{
   public CameraHelper cameraHelper;
   public Menu menu;
   private Game game;
-  private Circle selectedCircle;
+  private Button selectedCircle;
+  public World world;
+  public double mouseX;
+  public double mouseY;
+  private boolean gravityOn = false;
+  final Vector2 gravity = new Vector2(0, -9.8f);
+
+  private float deltaX;
+  private float deltaY;
 
   private boolean animate;
 
@@ -39,19 +47,30 @@ public class MenuController extends InputAdapter{
   private void init(){
     Gdx.input.setInputProcessor(this);
     cameraHelper = new CameraHelper();
-    initMenu();
+    world = new World(new Vector2(0, -9.8f), true);
+
+    initMenu(world);
     animate = false;
 
 
   }
 
 
-  private void initMenu(){
-    menu = new Menu();
+  private void initMenu(World world){
+
+    menu = new Menu(world);
   }
 
   public void update (float deltaTime) {
-    menu.menuItems.get(0).update(deltaTime);
+    //menu.menuItems.get(0).update(deltaTime);
+    menu.update(deltaTime);
+    if(gravityOn) world.step(Gdx.graphics.getDeltaTime(), 6, 2);
+    //System.out.println(world.getGravity());
+    //if(gravityOn){
+    //  world.setGravity(gravity);
+    //} else {
+    //  world.setGravity(new Vector2(0, 0));
+   // }
     //handleDebugInput(deltaTime);
     //handleInputMenu(deltaTime);
     //menu.update(deltaTime);
@@ -64,44 +83,43 @@ public class MenuController extends InputAdapter{
 
   @Override
   public boolean touchDown(int x, int y, int pointer, int button){
-    /*if(y < 100) {
-      System.out.println("touched at y = " + y);
-      game.setScreen(new MenuScreen(game));
-    }
-    if(!animate) {
-      float X = (x - (Gdx.graphics.getWidth() / 2)) / 60.0f;
-      float Y = (y - (Gdx.graphics.getHeight() / 2)) / 60.0f;
-      for (int i = 0; i < level.columns.length; i++) {
+    //if(y < 100) {
+    //  System.out.println("touched at y = " + y);
+    //  game.setScreen(new MenuScreen(game));
+    //}
+    //if(!animate) {
+    System.out.println(Constants.PIXELS_TO_METERS);
+    System.out.println("mouse coordinates: " + x + ", " + y);
+      float X = (x - (Gdx.graphics.getWidth() / 2)) / Constants.PIXELS_TO_METERS;
+      float Y = - (y - (Gdx.graphics.getHeight() / 2)) / Constants.PIXELS_TO_METERS;
+    System.out.println("adjusted mouse coordinates: " + X + ", " + Y);
 
-        for (int j = 0; j < level.columns[i].circles.size(); j++) {
-          Circle c = level.columns[i].circles.get(j);
-          Vector2 centre = new Vector2(c.getPosition().x + 0.5f, c.getPosition().y + 0.5f);
-          if (centre.dst(X, Y) < 0.5) {
-            selectedCircle = c;
-            selectedColumn = level.columns[i];
-            c.isSelected = true;
+        for (int j = 0; j < menu.menuItems.size(); j++) {
+          Button b = menu.menuItems.get(j);
+          if (b.body.getPosition().dst(X, Y) < 1) {
+            selectedCircle = b;
+            b.isSelected = true;
             // used to keep relationship to mouse cursor when moving
-            deltaX = X - c.getPosition().x;
-            deltaY = Y - c.getPosition().y;
-
-            // used to snap back to original position if no candidate position found
-            startX = c.getPosition().x;
-            startY = c.getPosition().y;
+            //deltaX = X - c.getPosition().x;
+            //deltaY = Y - c.getPosition().y;
+            System.out.println("clicking button " + b.getType());
+            if(!b.getType().equals("redButton"))b.body.setLinearVelocity(new Vector2(0, 15));
           }
         }
-      }
-    }*/
+    //}
     return false;
   }
 
   @Override
   public boolean touchUp(int x, int y, int pointer, int button){
-    float X = (x - (Gdx.graphics.getWidth() / 2)) / 60.0f;
-    float Y = (y - (Gdx.graphics.getHeight() / 2)) / 60.0f;
+
+    float X = (x - (Gdx.graphics.getWidth() / 2)) / Constants.PIXELS_TO_METERS;
+    float Y = - (y - (Gdx.graphics.getHeight() / 2)) / Constants.PIXELS_TO_METERS;
+    mouseX = X;
+    mouseY = Y;
 
     for(Button b : menu.menuItems){
-      System.out.println(b.getCentre().dst(X, Y));
-      if(b.getCentre().dst(X, Y) < 1){
+      if(b.body.getPosition().dst(X, Y) < 1){
         open(b.getType());
       }
     }
@@ -112,10 +130,20 @@ public class MenuController extends InputAdapter{
   }
 
   public void open(String type){
-    if(type.equals("timed")){
+    if(type.equals("timed") && !gravityOn){
       game.setScreen(new GameScreen(game));
-    } else if(type.equals("settings")){
+    } else if(type.equals("settings") && !gravityOn){
       game.setScreen(new SettingsScreen(game));
+    } else if(type.equals("redButton") && !gravityOn){
+      gravityOn = true;
+      System.out.println("button clicked");
+      System.out.println(gravityOn);
+      //world.setGravity(gravity);
+    } else if(type.equals("redButton") && gravityOn){
+      gravityOn = false;
+      init();
+      System.out.println("button clicked");
+      System.out.println(gravityOn);
     }
   }
 

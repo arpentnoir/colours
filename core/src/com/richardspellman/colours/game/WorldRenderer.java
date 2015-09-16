@@ -68,7 +68,7 @@ public class WorldRenderer implements Disposable {
 
   public void renderDebug(SpriteBatch batch){
     shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-    shapeRenderer.circle(100, 100, 20);
+    //shapeRenderer.circle(100, 100, 20);
     shapeRenderer.end();
   }
 
@@ -85,7 +85,16 @@ public class WorldRenderer implements Disposable {
     float x = -15;
     float y = -15;
     //batch.draw(Assets.instance.goldCoin.goldCoin, x, y, 50, 50, 100, 100, 0.35f, -0.35f, 0);
-    //Assets.instance.fonts.defaultBig.draw(batch, "" + worldController.score, x + 75, y + 37);
+    //Assets.instance.fonts.defaultSmall.draw(batch, "Score", x + 420, y + 37);
+    Assets.instance.fonts.defaultBig.draw(batch, "Score " + worldController.level.score, x + 400, y + 37);
+  }
+
+  private void renderGuiCounter(SpriteBatch batch){
+    float x = -15;
+    float y = -15;
+    //batch.draw(Assets.instance.goldCoin.goldCoin, x, y, 50, 50, 100, 100, 0.35f, -0.35f, 0);
+
+    Assets.instance.fonts.defaultBig.draw(batch, "Time  " + String.format("%.0f%n", worldController.level.time), x + 150, y + 37);
   }
 
   private void renderGuiExtraLive(SpriteBatch batch){
@@ -134,6 +143,8 @@ public class WorldRenderer implements Disposable {
 
     // draw FPS text (anchored to bottom right edge)
     renderGuiFpsCounter(batch);
+
+    renderGuiCounter(batch);
     batch.end();
   }
 

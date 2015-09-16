@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.richardspellman.colours.util.Constants;
 import com.richardspellman.colours.util.Constants.COLOUR;
 import com.richardspellman.colours.util.Assets;
+import com.badlogic.gdx.physics.box2d.Body;
 
 import java.util.Random;
 
@@ -31,6 +32,7 @@ public class Circle{
   public boolean isShrinking;
   boolean isMoving;
   public Sound sound;
+  private Body body;
   Random random;
 
 
@@ -71,9 +73,7 @@ public class Circle{
   public void render(SpriteBatch batch){
     TextureRegion region = regCircle;
     regCircle.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-    //if(colour.equals(COLOUR.RED)){
-      //System.out.println("position before render is " + position);
-    //}
+
     batch.draw(region.getTexture(), position.x, - position.y - 1, origin.x, origin.y, dimension.x, dimension.y, scale.x,
         scale.y, 0, region.getRegionX(), region.getRegionY(), region.getRegionWidth(),
         region.getRegionHeight(), false, false);

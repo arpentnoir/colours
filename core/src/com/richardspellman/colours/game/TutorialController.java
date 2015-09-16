@@ -67,9 +67,7 @@ public class TutorialController extends InputAdapter{
 
   @Override
   public boolean touchDown(int x, int y, int pointer, int button){
-    System.out.println("touch down");
     if(y < 100) {
-      System.out.println("touched at y = " + y);
       game.setScreen(new MenuScreen(game));
     }
     //if(!animate) {
@@ -106,16 +104,12 @@ public class TutorialController extends InputAdapter{
             Circle c = tutorial.circles.get(i);
             Vector2 centre = new Vector2(c.getPosition().x + 0.5f, c.getPosition().y + 0.5f);
             if (!c.equals(selectedCircle) && centre.dst(X, Y) < 0.5) {
-              //System.out.println("selected circle's colour is: " + selectedCircle.colour + " other circle's colour is: " + c.colour);
               intersectionFound = true;
               // make set colour return false if can't set, then know when to return
               if (c.setColour(c.colour * selectedCircle.colour)) {
                 tutorial.circles.remove(selectedCircle);
-                System.out.println("removing circle...");
-                //System.out.println(c.colour);
                 break;
               } else {
-                //System.out.println("call to set colour failed, resetting selected circle's position");
                 selectedCircle.setPosition(new Vector2(startX, startY));
                 selectedCircle.isSelected = false;
                 selectedCircle = null;
@@ -124,7 +118,6 @@ public class TutorialController extends InputAdapter{
             }
           }
         if (intersectionFound == false) {
-          //System.out.println("no intersecting circle found, resetting selected circle's position");
           selectedCircle.setPosition(new Vector2(startX, startY));
           selectedCircle.isSelected = false;
           selectedCircle = null;

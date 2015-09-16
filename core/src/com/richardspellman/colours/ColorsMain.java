@@ -11,6 +11,7 @@ import com.richardspellman.colours.game.WorldRenderer;
 import com.richardspellman.colours.game.screens.GameScreen;
 import com.richardspellman.colours.game.screens.MenuScreen;
 import com.richardspellman.colours.util.Assets;
+import com.richardspellman.colours.util.Constants;
 
 public class ColorsMain extends Game {
 	SpriteBatch batch;
@@ -26,6 +27,13 @@ public class ColorsMain extends Game {
 
 		// Set Libgdx log level to DEBUG
 		Gdx.app.setLogLevel(Application.LOG_DEBUG);
+
+		System.out.println(Gdx.graphics.getWidth() + " " + Gdx.graphics.getHeight());
+		System.out.println(Constants.PIXELS_TO_METERS);
+		System.out.println(Constants.VIEWPORT_GUI_HEIGHT);
+		System.out.println(Constants.VIEWPORT_GUI_WIDTH);
+		System.out.println(Constants.VIEWPORT_HEIGHT);
+		System.out.println(Constants.VIEWPORT_WIDTH);
 
 		// Load assets
 		Assets.instance.init(new AssetManager());

@@ -7,8 +7,8 @@ import com.richardspellman.colours.ColorsMain;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.width = 540;
-		config.height = 960;
+		config.width = 360;
+		config.height = 640;
 		new LwjglApplication(new ColorsMain(), config);
 	}
 }
