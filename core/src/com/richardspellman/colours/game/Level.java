@@ -61,7 +61,7 @@ public class Level {
       for(int y = 0; y < 7; y++){
         Circle circle = new Circle(new Vector2((x - 3.5f) * 1.05f, (7 - y - 3.5f) * 1.05f), colours[random.nextInt(7)]);
         circle.rank = y;
-        c.circles.add(circle);
+        c.add(circle);
 
       }
     }

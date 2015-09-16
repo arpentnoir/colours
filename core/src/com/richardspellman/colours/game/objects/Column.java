@@ -42,14 +42,20 @@ public class Column {
     circles.remove(index);
     Circle circle = new Circle(newPosition, colours[random.nextInt(7)]);
 
-    circles.add(circle);
+    add(circle);
+  }
+
+  public void add(Circle c){
+    if(circles.size() < 7){
+      circles.add(c);
+    }
   }
 
   public void remove(Circle circle){
     circles.remove(circle);
     int rank = circles.size();
     Circle c = new Circle(new Vector2((position - 3.5f) * 1.05f, (-rank) * 1.05f), colours[random.nextInt(7)]);
-    circles.add(c);
+    add(c);
     c.rank = rank;
   }
 

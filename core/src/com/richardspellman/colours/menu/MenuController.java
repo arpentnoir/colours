@@ -88,11 +88,11 @@ public class MenuController extends InputAdapter{
     //  game.setScreen(new MenuScreen(game));
     //}
     //if(!animate) {
-    System.out.println(Constants.PIXELS_TO_METERS);
-    System.out.println("mouse coordinates: " + x + ", " + y);
+    //System.out.println(Constants.PIXELS_TO_METERS);
+    //System.out.println("mouse coordinates: " + x + ", " + y);
       float X = (x - (Gdx.graphics.getWidth() / 2)) / Constants.PIXELS_TO_METERS;
       float Y = - (y - (Gdx.graphics.getHeight() / 2)) / Constants.PIXELS_TO_METERS;
-    System.out.println("adjusted mouse coordinates: " + X + ", " + Y);
+    //System.out.println("adjusted mouse coordinates: " + X + ", " + Y);
 
         for (int j = 0; j < menu.menuItems.size(); j++) {
           Button b = menu.menuItems.get(j);
@@ -102,7 +102,7 @@ public class MenuController extends InputAdapter{
             // used to keep relationship to mouse cursor when moving
             //deltaX = X - c.getPosition().x;
             //deltaY = Y - c.getPosition().y;
-            System.out.println("clicking button " + b.getType());
+            //System.out.println("clicking button " + b.getType());
             if(!b.getType().equals("redButton"))b.body.setLinearVelocity(new Vector2(0, 15));
           }
         }
@@ -136,14 +136,14 @@ public class MenuController extends InputAdapter{
       game.setScreen(new SettingsScreen(game));
     } else if(type.equals("redButton") && !gravityOn){
       gravityOn = true;
-      System.out.println("button clicked");
-      System.out.println(gravityOn);
+      //System.out.println("button clicked");
+      //System.out.println(gravityOn);
       //world.setGravity(gravity);
     } else if(type.equals("redButton") && gravityOn){
       gravityOn = false;
       init();
-      System.out.println("button clicked");
-      System.out.println(gravityOn);
+      //System.out.println("button clicked");
+      //System.out.println(gravityOn);
     }
   }
 

@@ -54,7 +54,7 @@ public class MenuRenderer implements Disposable{
 
   public void render(){
     renderMenu(batch);
-    System.out.println(Gdx.input.getAccelerometerX());
+    //System.out.println(Gdx.input.getAccelerometerX());
     //debugRenderer.render(menuController.world, camera.combined);
     //renderDebug(batch);
   }
