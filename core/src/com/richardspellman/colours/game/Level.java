@@ -97,7 +97,7 @@ public class Level {
           for (int j = firstIndex; j <= lastIndex; j++) {
             removalQueue.add(columns[i].circles.get(j));
             columns[i].circles.get(j).sound.play();
-            switch (columns[i].circles.get(i).colour){
+            switch (columns[i].circles.get(j).colour){
               case 2:
                 score += 4;
                 break;
@@ -117,7 +117,7 @@ public class Level {
                 score += 2;
                 break;
               case 30:
-                time += 5;
+                time += 2;
                 break;
               default:
                 break;
@@ -177,7 +177,7 @@ public class Level {
                 score += 2;
                 break;
               case 30:
-                time += 5;
+                time += 2;
                 break;
               default:
                 break;
