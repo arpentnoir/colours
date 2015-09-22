@@ -1,4 +1,4 @@
-package com.richardspellman.colours.game.objects;
+package com.richardspellman.colours.game.models;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
@@ -21,19 +21,18 @@ import java.util.Random;
  */
 public class Circle{
   private Vector2 position;
-  public Vector2 dimension;
-  public Vector2 origin;
-  public Vector2 scale;
-  public int colour;
-  public int rank;
-  public boolean isSelected;
+  private Vector2 dimension;
+  private Vector2 origin;
+  private Vector2 scale;
+  private int colour;
+  private int rank;
+  private boolean isSelected;
   private Vector2 centre;
-  public float rotation;
-  public boolean isShrinking;
-  boolean isMoving;
-  public Sound sound;
+  private float rotation;
+  private boolean isShrinking;
+  private boolean isMoving;
   private Body body;
-  Random random;
+  private Random random;
 
 
   private TextureRegion regCircle;
@@ -43,16 +42,11 @@ public class Circle{
     dimension = new Vector2(1, 1);
     origin = new Vector2(0.5f, 0.5f);
     scale = new Vector2(0.9f, 0.9f);
-    //centre = new Vector2(position.x + scale.x / 2f, position.y = scale.y / 2f);
     this.position = position;
     setColour(colour);
     isSelected = false;
     isShrinking = false;
     isMoving = false;
-    random = new Random();
-    int r = random.nextInt(10) + 1;
-    sound = Gdx.audio.newSound(Gdx.files.internal("sounds/pop" + r +".wav"));
-
   }
 
   public void update(float deltaTime){
@@ -70,6 +64,8 @@ public class Circle{
     if(isShrinking) scale = new Vector2(scale.x * 0.9f, scale.y * 0.9f);
   }
 
+  // TODO: should be moved to the view
+  /*
   public void render(SpriteBatch batch){
     TextureRegion region = regCircle;
     regCircle.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
@@ -77,7 +73,7 @@ public class Circle{
     batch.draw(region.getTexture(), position.x, - position.y - 1, origin.x, origin.y, dimension.x, dimension.y, scale.x,
         scale.y, 0, region.getRegionX(), region.getRegionY(), region.getRegionWidth(),
         region.getRegionHeight(), false, false);
-  }
+  }*/
 
   public boolean setColour(int colour){
     if(colour == 2 || colour == 3 || colour == 5 || colour == 6 || colour == 10 || colour == 15 || colour == 30) {
@@ -85,6 +81,9 @@ public class Circle{
     } else {
       return false;
     }
+
+    //TODO: this should be moved to the view
+    /*
     if(colour == 2){
       regCircle = Assets.instance.red.red;
     } else if(colour == 6){
@@ -99,7 +98,7 @@ public class Circle{
       regCircle = Assets.instance.purple.purple;
     } else if(colour == 30){
       regCircle = Assets.instance.brown.brown;
-    }
+    }*/
     return true;
   }
 
@@ -113,5 +112,101 @@ public class Circle{
 
   public Vector2 getCentre() {
     return centre;
+  }
+
+  public Vector2 getDimension() {
+    return dimension;
+  }
+
+  public void setDimension(Vector2 dimension) {
+    this.dimension = dimension;
+  }
+
+  public Vector2 getOrigin() {
+    return origin;
+  }
+
+  public void setOrigin(Vector2 origin) {
+    this.origin = origin;
+  }
+
+  public Vector2 getScale() {
+    return scale;
+  }
+
+  public void setScale(Vector2 scale) {
+    this.scale = scale;
+  }
+
+  public int getColour() {
+    return colour;
+  }
+
+  public int getRank() {
+    return rank;
+  }
+
+  public void setRank(int rank) {
+    this.rank = rank;
+  }
+
+  public boolean isSelected() {
+    return isSelected;
+  }
+
+  public void setIsSelected(boolean isSelected) {
+    this.isSelected = isSelected;
+  }
+
+  public TextureRegion getRegCircle() {
+    return regCircle;
+  }
+
+  public void setRegCircle(TextureRegion regCircle) {
+    this.regCircle = regCircle;
+  }
+
+  public Random getRandom() {
+    return random;
+  }
+
+  public void setRandom(Random random) {
+    this.random = random;
+  }
+
+  public Body getBody() {
+    return body;
+  }
+
+  public void setBody(Body body) {
+    this.body = body;
+  }
+
+  public boolean isMoving() {
+    return isMoving;
+  }
+
+  public void setIsMoving(boolean isMoving) {
+    this.isMoving = isMoving;
+  }
+
+  public boolean isShrinking() {
+    return isShrinking;
+  }
+
+  public void setIsShrinking(boolean isShrinking) {
+    this.isShrinking = isShrinking;
+  }
+
+  public float getRotation() {
+    return rotation;
+  }
+
+  public void setRotation(float rotation) {
+    this.rotation = rotation;
+  }
+
+  public void setCentre(Vector2 centre) {
+    this.centre = centre;
   }
 }

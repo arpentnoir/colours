@@ -1,4 +1,4 @@
-package com.richardspellman.colours.game;
+package com.richardspellman.colours.game.controllers;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -6,19 +6,21 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
-import com.richardspellman.colours.game.objects.Circle;
-import com.richardspellman.colours.game.objects.Column;
+import com.richardspellman.colours.game.models.Circle;
+import com.richardspellman.colours.game.models.Column;
 import com.richardspellman.colours.game.screens.MenuScreen;
 import com.richardspellman.colours.util.CameraHelper;
 import com.richardspellman.colours.util.Constants;
 
 /**
- * Created by richardspellman on 20/08/15.
+ * Created by richardspellman on 21/09/15.
  */
-public class TutorialController extends InputAdapter{
+public class GameController extends InputAdapter{
+/*
 
   public CameraHelper cameraHelper;
-  public Tutorial tutorial;
+  public Level level;
+  public int score;
   private Game game;
   public World world;
   private Circle selectedCircle;
@@ -31,9 +33,9 @@ public class TutorialController extends InputAdapter{
 
 
 
-  private static final String TAG = TutorialController.class.getName();
+  private static final String TAG = GameController.class.getName();
 
-  public TutorialController(Game game){
+  public GameController(Game game){
     this.game = game;
     init();
   }
@@ -41,22 +43,24 @@ public class TutorialController extends InputAdapter{
   private void init(){
     Gdx.input.setInputProcessor(this);
     cameraHelper = new CameraHelper();
-    initTutorial();
+    initLevel();
     animate = false;
-
-
   }
 
 
-  private void initTutorial(){
-    tutorial = new Tutorial();
+  private void initLevel(){
+    score = 0;
+    level = new Level(Constants.LEVEL_01);
 
   }
 
   public void update (float deltaTime) {
     handleDebugInput(deltaTime);
     handleInputGame(deltaTime);
-    //if(!animate) tutorial.update(deltaTime);
+    if(!animate) level.update(deltaTime);
+    if(level.getTime() < 0){
+      game.setScreen(new MenuScreen(game));
+    }
     //cameraHelper.update(deltaTime);
 
   }
@@ -70,16 +74,18 @@ public class TutorialController extends InputAdapter{
     if(y < 100) {
       game.setScreen(new MenuScreen(game));
     }
-    //if(!animate) {
-      float X = (x - (Gdx.graphics.getWidth() / 2)) / 60.0f;
-      float Y = (y - (Gdx.graphics.getHeight() / 2)) / 60.0f;
+    if(!animate && selectedCircle == null && pointer == 0) {
+      float X = (x - (Gdx.graphics.getWidth() / 2)) / Constants.PIXELS_TO_METERS;
+      float Y = (y - (Gdx.graphics.getHeight() / 2)) / Constants.PIXELS_TO_METERS;
+      for (int i = 0; i < level.grid.columns.length; i++) {
 
-        for (int j = 0; j < tutorial.circles.size(); j++) {
-          Circle c = tutorial.circles.get(j);
+        for (int j = 0; j < level.grid.columns[i].circles.size(); j++) {
+          Circle c = level.grid.columns[i].circles.get(j);
           Vector2 centre = new Vector2(c.getPosition().x + 0.5f, c.getPosition().y + 0.5f);
           if (centre.dst(X, Y) < 0.5) {
             selectedCircle = c;
-            c.isSelected = true;
+            selectedColumn = level.grid.columns[i];
+            c.setIsSelected(true);
             // used to keep relationship to mouse cursor when moving
             deltaX = X - c.getPosition().x;
             deltaY = Y - c.getPosition().y;
@@ -89,41 +95,47 @@ public class TutorialController extends InputAdapter{
             startY = c.getPosition().y;
           }
         }
-      //}
+      }
+    }
     return false;
   }
 
   @Override
   public boolean touchUp(int x, int y, int pointer, int button){
     if(!animate) {
-      float X = (x - (Gdx.graphics.getWidth() / 2)) / 60.0f;
-      float Y = (y - (Gdx.graphics.getHeight() / 2)) / 60.0f;
+      float X = (x - (Gdx.graphics.getWidth() / 2)) / Constants.PIXELS_TO_METERS;
+      float Y = (y - (Gdx.graphics.getHeight() / 2)) / Constants.PIXELS_TO_METERS;
       boolean intersectionFound = false;
-      if (selectedCircle != null) {
-        for (int i = 0; i < tutorial.circles.size(); i++) {
-            Circle c = tutorial.circles.get(i);
+      if (selectedCircle != null && pointer == 0) {
+        for (int i = 0; i < level.grid.columns.length; i++) {
+          for (int j = 0; j < level.grid.columns[i].circles.size(); j++) {
+            Circle c = level.grid.columns[i].circles.get(j);
             Vector2 centre = new Vector2(c.getPosition().x + 0.5f, c.getPosition().y + 0.5f);
             if (!c.equals(selectedCircle) && centre.dst(X, Y) < 0.5) {
               intersectionFound = true;
               // make set colour return false if can't set, then know when to return
-              if (c.setColour(c.colour * selectedCircle.colour)) {
-                tutorial.circles.remove(selectedCircle);
+              if (c.setColour(c.getColour() * selectedCircle.getColour())) {
+                selectedColumn.remove(selectedCircle);
                 break;
               } else {
                 selectedCircle.setPosition(new Vector2(startX, startY));
-                selectedCircle.isSelected = false;
+                selectedCircle.setIsSelected(false);
                 selectedCircle = null;
+                selectedColumn = null;
                 break;
               }
             }
           }
+        }
         if (intersectionFound == false) {
           selectedCircle.setPosition(new Vector2(startX, startY));
-          selectedCircle.isSelected = false;
+          selectedCircle.setIsSelected(false);
           selectedCircle = null;
           selectedColumn = null;
         }
       }
+      level.grid.checkColumns();
+      level.grid.checkRows();
       try {
         animate();
       } catch (InterruptedException e){
@@ -134,18 +146,18 @@ public class TutorialController extends InputAdapter{
   }
 
   public void animate() throws InterruptedException{
-   /* animate = true;
+    animate = true;
 
-    for (Circle c : level.removalQueue) {
-      c.isShrinking = true;
+    for (Circle c : level.grid.removalQueue) {
+      c.setIsShrinking(true);
     }
-    animate = false;*/
+    animate = false;
   }
 
   @Override
   public boolean touchDragged(int x, int y, int pointer){
-    if(selectedCircle != null && !animate){
-      selectedCircle.setPosition(new Vector2((x - (Gdx.graphics.getWidth() / 2)) / 60.0f - deltaX, (y - (Gdx.graphics.getHeight() / 2)) / 60.0f - deltaY));
+    if(selectedCircle != null && !animate && pointer == 0){
+      selectedCircle.setPosition(new Vector2((x - (Gdx.graphics.getWidth() / 2)) / Constants.PIXELS_TO_METERS - deltaX, (y - (Gdx.graphics.getHeight() / 2)) / Constants.PIXELS_TO_METERS - deltaY));
     }
 
     return false;
@@ -163,6 +175,7 @@ public class TutorialController extends InputAdapter{
 
 
   private void handleInputGame(float deltaTime){
-  }
+  }*/
 
 }
+

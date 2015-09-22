@@ -3,12 +3,8 @@ package com.richardspellman.colours.menu;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-import com.richardspellman.colours.game.objects.Circle;
-import com.richardspellman.colours.game.objects.Column;
-import com.richardspellman.colours.util.Constants;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 /**
  * Created by richardspellman on 24/08/15.
@@ -167,9 +163,6 @@ public class Menu {
       menuItems.add(timedButton);
       circle.dispose();
 
-      for (Button button : menuItems){
-        System.out.println(button.getType() + " :" + button.getPosition() + " body " + button.body.getPosition());
-      }
 
       BodyDef bodyDef = new BodyDef();
       bodyDef.type = BodyDef.BodyType.KinematicBody;

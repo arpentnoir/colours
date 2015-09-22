@@ -3,20 +3,20 @@ package com.richardspellman.colours.game.screens;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.richardspellman.colours.game.controllers.SettingsController;
-import com.richardspellman.colours.game.renderers.SettingsRenderer;
+import com.richardspellman.colours.game.controllers.PowerupController;
+import com.richardspellman.colours.game.renderers.PowerupsRenderer;
 
 /**
  * Created by richardspellman on 21/09/15.
  */
-public class SettingsScreen extends AbstractGameScreen{
+public class PowerupsScreen extends AbstractGameScreen{
 
-  private SettingsController powerupController;
-  private SettingsRenderer powerupsRenderer;
+  private PowerupController powerupController;
+  private PowerupsRenderer powerupsRenderer;
 
   private boolean paused;
 
-  public SettingsScreen(Game game){
+  public PowerupsScreen(Game game){
     super(game);
   }
 
@@ -37,8 +37,8 @@ public class SettingsScreen extends AbstractGameScreen{
 
   @Override
   public void show() {
-    powerupController = new SettingsController(game);
-    powerupsRenderer = new SettingsRenderer(powerupController);
+    powerupController = new PowerupController(game);
+    powerupsRenderer = new PowerupsRenderer(powerupController);
     Gdx.input.setCatchBackKey(true);
 
   }

@@ -1,7 +1,7 @@
-package com.richardspellman.colours.game.objects;
+package com.richardspellman.colours.game.models;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.richardspellman.colours.game.models.Circle;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -26,9 +26,9 @@ public class Column {
 
     nextPosition = 0;
     for(int i = 0; i < circles.size(); i++){
-      circles.get(i).rank = i;
+      circles.get(i).setRank(i);
       circles.get(i).update(deltaTime);
-      if(circles.get(i).scale.x < 0.2){
+      if(circles.get(i).getScale().x < 0.2){
         //circles.get(i).sound.play();
         remove(i);
         nextPosition++;
@@ -56,12 +56,23 @@ public class Column {
     int rank = circles.size();
     Circle c = new Circle(new Vector2((position - 3.5f) * 1.05f, (-rank) * 1.05f), colours[random.nextInt(7)]);
     add(c);
-    c.rank = rank;
+    c.setRank(rank);
   }
 
-  public void render(SpriteBatch batch){
+  @Override
+  public String toString(){
+    String str = "";
+    for(Circle circle : circles){
+      str = str + circle.getColour() + " ";
+    }
+    return str;
+  }
+
+  // TODO: move to the view
+  /*public void render(SpriteBatch batch){
     for(Circle c : circles){
       c.render(batch);
     }
-  }
+
+  }*/
 }

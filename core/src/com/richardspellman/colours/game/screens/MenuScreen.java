@@ -3,14 +3,6 @@ package com.richardspellman.colours.game.screens;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
-import com.richardspellman.colours.game.WorldController;
-import com.richardspellman.colours.game.WorldRenderer;
-import com.richardspellman.colours.menu.Button;
-import com.richardspellman.colours.util.Assets;
 import com.richardspellman.colours.menu.MenuController;
 import com.richardspellman.colours.menu.MenuRenderer;
 

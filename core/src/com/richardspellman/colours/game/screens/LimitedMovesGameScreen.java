@@ -3,49 +3,50 @@ package com.richardspellman.colours.game.screens;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.richardspellman.colours.game.controllers.SettingsController;
-import com.richardspellman.colours.game.renderers.SettingsRenderer;
+import com.richardspellman.colours.game.controllers.GameController;
+import com.richardspellman.colours.game.controllers.LimitedMovesGameController;
+import com.richardspellman.colours.game.renderers.LimitedMovesGameRenderer;
 
 /**
  * Created by richardspellman on 21/09/15.
  */
-public class SettingsScreen extends AbstractGameScreen{
+public class LimitedMovesGameScreen extends AbstractGameScreen{
 
-  private SettingsController powerupController;
-  private SettingsRenderer powerupsRenderer;
+  private LimitedMovesGameController limitedMovesGameController;
+  private LimitedMovesGameRenderer limitedMovesGameRenderer;
 
   private boolean paused;
 
-  public SettingsScreen(Game game){
+  public LimitedMovesGameScreen(Game game){
     super(game);
   }
 
   @Override
   public void render(float deltaTime) {
     if(!paused){
-      powerupController.update(deltaTime);
+      limitedMovesGameController.update(deltaTime);
       Gdx.gl.glClearColor(245.0f / 255.0f, 245.0f / 255.0f, 245.0f / 255.0f, 255.0f / 255.0f);
       Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-      powerupsRenderer.render();
+      limitedMovesGameRenderer.render();
     }
   }
 
   @Override
   public void resize(int width, int height) {
-    powerupsRenderer.resize(width, height);
+    limitedMovesGameRenderer.resize(width, height);
   }
 
   @Override
   public void show() {
-    powerupController = new SettingsController(game);
-    powerupsRenderer = new SettingsRenderer(powerupController);
+    limitedMovesGameController = new LimitedMovesGameController(game);
+    limitedMovesGameRenderer = new LimitedMovesGameRenderer(limitedMovesGameController);
     Gdx.input.setCatchBackKey(true);
 
   }
 
   @Override
   public void hide() {
-    powerupsRenderer.dispose();
+    limitedMovesGameRenderer.dispose();
     Gdx.input.setCatchBackKey(false);
 
   }

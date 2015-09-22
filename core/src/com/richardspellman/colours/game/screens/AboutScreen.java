@@ -3,49 +3,49 @@ package com.richardspellman.colours.game.screens;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.richardspellman.colours.game.controllers.SettingsController;
-import com.richardspellman.colours.game.renderers.SettingsRenderer;
+import com.richardspellman.colours.game.renderers.AboutRenderer;
+import com.richardspellman.colours.game.controllers.AboutController;
 
 /**
  * Created by richardspellman on 21/09/15.
  */
-public class SettingsScreen extends AbstractGameScreen{
+public class AboutScreen extends AbstractGameScreen{
 
-  private SettingsController powerupController;
-  private SettingsRenderer powerupsRenderer;
+  private AboutController aboutController;
+  private AboutRenderer aboutRenderer;
 
   private boolean paused;
 
-  public SettingsScreen(Game game){
+  public AboutScreen(Game game){
     super(game);
   }
 
   @Override
   public void render(float deltaTime) {
     if(!paused){
-      powerupController.update(deltaTime);
+      aboutController.update(deltaTime);
       Gdx.gl.glClearColor(245.0f / 255.0f, 245.0f / 255.0f, 245.0f / 255.0f, 255.0f / 255.0f);
       Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-      powerupsRenderer.render();
+      aboutRenderer.render();
     }
   }
 
   @Override
   public void resize(int width, int height) {
-    powerupsRenderer.resize(width, height);
+    aboutRenderer.resize(width, height);
   }
 
   @Override
   public void show() {
-    powerupController = new SettingsController(game);
-    powerupsRenderer = new SettingsRenderer(powerupController);
+    aboutController = new AboutController(game);
+    aboutRenderer = new AboutRenderer(aboutController);
     Gdx.input.setCatchBackKey(true);
 
   }
 
   @Override
   public void hide() {
-    powerupsRenderer.dispose();
+    aboutRenderer.dispose();
     Gdx.input.setCatchBackKey(false);
 
   }

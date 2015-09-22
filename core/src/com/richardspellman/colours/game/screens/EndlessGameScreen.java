@@ -3,49 +3,49 @@ package com.richardspellman.colours.game.screens;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.richardspellman.colours.game.WorldController;
-import com.richardspellman.colours.game.WorldRenderer;
+import com.richardspellman.colours.game.controllers.EndlessGameController;
+import com.richardspellman.colours.game.renderers.EndlessGameRenderer;
 
 /**
- * Created by richardspellman on 3/08/15.
+ * Created by richardspellman on 21/09/15.
  */
-public class GameScreen extends AbstractGameScreen{
+public class EndlessGameScreen extends AbstractGameScreen{
 
-  private WorldController worldController;
-  private WorldRenderer worldRenderer;
+  private EndlessGameController endlessGameController;
+  private EndlessGameRenderer endlessGameRenderer;
 
   private boolean paused;
 
-  public GameScreen(Game game){
+  public EndlessGameScreen(Game game){
     super(game);
   }
 
   @Override
   public void render(float deltaTime) {
     if(!paused){
-      worldController.update(deltaTime);
+      endlessGameController.update(deltaTime);
       Gdx.gl.glClearColor(245.0f / 255.0f, 245.0f / 255.0f, 245.0f / 255.0f, 255.0f / 255.0f);
       Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-      worldRenderer.render();
+      endlessGameRenderer.render();
     }
   }
 
   @Override
   public void resize(int width, int height) {
-    worldRenderer.resize(width, height);
+    endlessGameRenderer.resize(width, height);
   }
 
   @Override
   public void show() {
-    worldController = new WorldController(game);
-    worldRenderer = new WorldRenderer(worldController);
+    endlessGameController = new EndlessGameController(game);
+    endlessGameRenderer = new EndlessGameRenderer(endlessGameController);
     Gdx.input.setCatchBackKey(true);
 
   }
 
   @Override
   public void hide() {
-    worldRenderer.dispose();
+    endlessGameRenderer.dispose();
     Gdx.input.setCatchBackKey(false);
 
   }
