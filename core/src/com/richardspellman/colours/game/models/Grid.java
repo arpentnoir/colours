@@ -1,5 +1,6 @@
 package com.richardspellman.colours.game.models;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
 import java.util.ArrayList;
@@ -60,7 +61,9 @@ public class Grid {
   }
 
   public void removeScoringRuns(){
-
+    for(Circle circle : removalQueue){
+      columns[(int) circle.getGridPosition().x].remove(circle);
+    }
 
   }
 
@@ -92,6 +95,7 @@ public class Grid {
         }
         if (count >= 4) {
           for (int j = firstIndex; j <= lastIndex; j++) {
+            System.out.println("adding to removal queue");
             removalQueue.add(columns[i].circles.get(j));
           }
         }
@@ -126,6 +130,7 @@ public class Grid {
       }
       if (count >= 4) {
         for (int i = firstIndex; i <= lastIndex; i++) {
+          System.out.println("adding to removal queue");
           removalQueue.add(columns[i].circles.get(j));
         }
       }
@@ -171,6 +176,30 @@ public class Grid {
       str = str + "\n";
     }
     return str;
+  }
+
+
+  public String currentPositionToString(){
+    String str = "";
+    for(int j = 0; j < 7; j++){
+      for(int i = 0; i < columns.length; i++){
+        str = str + columns[i].circles.get(j).getCurrentPosition() + " ";
+      }
+      str = str + "\n";
+    }
+    return str;
+  }
+
+  public void render(SpriteBatch batch){
+    for(Column column : columns){
+      column.render(batch);
+    }
+  }
+
+  public void update(float deltaTime){
+    for (Column column : columns){
+      column.update(deltaTime);
+    }
   }
 
   /**

@@ -21,6 +21,8 @@ import java.util.Random;
  */
 public class Circle{
   private Vector2 position;
+  private Vector2 currentPosition;
+  private Vector2 gridPosition;
   private Vector2 dimension;
   private Vector2 origin;
   private Vector2 scale;
@@ -33,73 +35,102 @@ public class Circle{
   private boolean isMoving;
   private Body body;
   private Random random;
+  private float size;
 
+  float seperation = Constants.VIEWPORT_GUI_WIDTH / 8.5f;
+  float xOffset = (Constants.VIEWPORT_GUI_WIDTH / 2) - 3.5f * seperation;
+  float yOffset = (Constants.VIEWPORT_GUI_HEIGHT / 2) - 3f * seperation;
 
   private TextureRegion regCircle;
 
-  public Circle(Vector2 position, int colour){
+  public Circle(Vector2 gridPosition, int colour){
     super();
-    dimension = new Vector2(1, 1);
+    size = Constants.VIEWPORT_GUI_WIDTH / 9.0f;
+    dimension = new Vector2(size, size);
     origin = new Vector2(0.5f, 0.5f);
-    scale = new Vector2(0.9f, 0.9f);
-    this.position = position;
+    scale = new Vector2(1f, 1f);
+    this.gridPosition = gridPosition;
+    //TODO: finalise the current position on creation
+    currentPosition = new Vector2(gridPosition.x * seperation + xOffset, -gridPosition.y * seperation * 2 - yOffset );
+    position = new Vector2(gridPosition.x * seperation + xOffset, -gridPosition.y * seperation + yOffset * 2);
+    centre = new Vector2(position.x  + (size / 2), position.y + (size / 2));
     setColour(colour);
     isSelected = false;
     isShrinking = false;
     isMoving = false;
+    System.out.println("Created circle with current position =" + currentPosition);
   }
 
   public void update(float deltaTime){
     // kludgy, fix
     //centre = new Vector2(position.x + scale.x / 2f, position.y = scale.y / 2f);
-    if(!isSelected && position.y != ((7 - rank) - 3.5f) * 1.05f){
-      isMoving = true;
+    //System.out.println(currentPosition.y - position.y);
+    //TODO: remove hardcoded values
+    if(!isSelected) {
+      //System.out.println(currentPosition.y - position.y);
+      if (position.y - currentPosition.y > 5) {
+        currentPosition.y += 15;
+      } else {
+        currentPosition.y = position.y;
+      }
     }
-    if(isMoving && Math.abs(position.y - ((7 - rank) - 3.5f) * 1.05f) > 0.2){
-      position.y += 0.2;
-    } else if(Math.abs(position.y - ((7 - rank) - 3.5f) * 1.05f) <= 0.2){
-      position.y = ((7 - rank) - 3.5f) * 1.05f;
-      isMoving = false;
-    }
+    centre = new Vector2(currentPosition.x  + (size / 2), currentPosition.y + (size / 2));
+
+    //TODO: change this so they can't fall off below the grid
+    //if(!isSelected && position.y != ((7 - rank) - 3.5f) * 1.05f){
+    //  isMoving = true;
+    //}
+    //if(isMoving && Math.abs(position.y - ((7 - rank) - 3.5f) * 1.05f) > 0.2){
+    //  position.y += 0.2;
+    //} else if(Math.abs(position.y - ((7 - rank) - 3.5f) * 1.05f) <= 0.2){
+    //  position.y = ((7 - rank) - 3.5f) * 1.05f;
+    //  isMoving = false;
+    //}
     if(isShrinking) scale = new Vector2(scale.x * 0.9f, scale.y * 0.9f);
   }
 
-  // TODO: should be moved to the view
-  /*
+
   public void render(SpriteBatch batch){
+    regCircle = getRegion();
     TextureRegion region = regCircle;
+
     regCircle.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
-    batch.draw(region.getTexture(), position.x, - position.y - 1, origin.x, origin.y, dimension.x, dimension.y, scale.x,
+    batch.draw(region.getTexture(), currentPosition.x, currentPosition.y, origin.x, origin.y, dimension.x, dimension.y, scale.x,
         scale.y, 0, region.getRegionX(), region.getRegionY(), region.getRegionWidth(),
         region.getRegionHeight(), false, false);
-  }*/
+  }
 
   public boolean setColour(int colour){
     if(colour == 2 || colour == 3 || colour == 5 || colour == 6 || colour == 10 || colour == 15 || colour == 30) {
       this.colour = colour;
     } else {
+      //System.out.println("ok, so it's calling setColour, but not working for some reason...");
       return false;
     }
-
-    //TODO: this should be moved to the view
-    /*
-    if(colour == 2){
-      regCircle = Assets.instance.red.red;
-    } else if(colour == 6){
-      regCircle = Assets.instance.orange.orange;
-    } else if(colour == 3){
-      regCircle = Assets.instance.yellow.yellow;
-    } else if(colour == 15){
-      regCircle = Assets.instance.green.green;
-    } else if(colour == 5){
-      regCircle = Assets.instance.blue.blue;
-    } else if(colour == 10){
-      regCircle = Assets.instance.purple.purple;
-    } else if(colour == 30){
-      regCircle = Assets.instance.brown.brown;
-    }*/
+   //System.out.println("well, that seems to have worked");
     return true;
+  }
+
+  private TextureRegion getRegion(){
+
+    TextureRegion region;
+    if(colour == 2){
+      region = Assets.instance.red.red;
+    } else if(colour == 6){
+      region = Assets.instance.orange.orange;
+    } else if(colour == 3){
+      region = Assets.instance.yellow.yellow;
+    } else if(colour == 15){
+      region = Assets.instance.green.green;
+    } else if(colour == 5){
+      region = Assets.instance.blue.blue;
+    } else if(colour == 10){
+      region = Assets.instance.purple.purple;
+    } else{
+      region = Assets.instance.brown.brown;
+    }
+    return region;
   }
 
   public Vector2 getPosition() {
@@ -208,5 +239,27 @@ public class Circle{
 
   public void setCentre(Vector2 centre) {
     this.centre = centre;
+  }
+
+  public Vector2 getGridPosition() {
+    return gridPosition;
+  }
+
+  public void setGridPosition(Vector2 gridPosition) {
+
+    this.gridPosition = gridPosition;
+    updatePosition();
+  }
+
+  public void updatePosition(){
+    position = new Vector2(gridPosition.x * seperation + xOffset, -gridPosition.y * seperation + yOffset * 2);
+  }
+
+  public void setCurrentPosition(Vector2 currentPosition){
+    this.currentPosition = currentPosition;
+  }
+
+  public Vector2 getCurrentPosition(){
+    return currentPosition;
   }
 }

@@ -37,7 +37,6 @@ public class AboutRenderer implements Disposable {
     }
 
     public void renderAbout(SpriteBatch batch){
-      System.out.println("rendering about");
       batch.setProjectionMatrix(camera.combined);
       batch.begin();
       Assets.instance.fonts.defaultBig.draw(batch, "About", 0, 0);

@@ -6,8 +6,10 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
+import com.richardspellman.colours.game.models.BaseGame;
 import com.richardspellman.colours.game.models.Circle;
 import com.richardspellman.colours.game.models.Column;
+import com.richardspellman.colours.game.models.Grid;
 import com.richardspellman.colours.game.screens.MenuScreen;
 import com.richardspellman.colours.util.CameraHelper;
 import com.richardspellman.colours.util.Constants;
@@ -16,12 +18,12 @@ import com.richardspellman.colours.util.Constants;
  * Created by richardspellman on 21/09/15.
  */
 public class GameController extends InputAdapter{
-/*
+
 
   public CameraHelper cameraHelper;
-  public Level level;
+  public BaseGame game;
   public int score;
-  private Game game;
+  protected Game libgdxGame;
   public World world;
   private Circle selectedCircle;
   private Column selectedColumn;
@@ -36,32 +38,17 @@ public class GameController extends InputAdapter{
   private static final String TAG = GameController.class.getName();
 
   public GameController(Game game){
-    this.game = game;
+    this.libgdxGame = game;
     init();
   }
 
   private void init(){
     Gdx.input.setInputProcessor(this);
-    cameraHelper = new CameraHelper();
-    initLevel();
-    animate = false;
   }
 
-
-  private void initLevel(){
-    score = 0;
-    level = new Level(Constants.LEVEL_01);
-
-  }
 
   public void update (float deltaTime) {
-    handleDebugInput(deltaTime);
-    handleInputGame(deltaTime);
-    if(!animate) level.update(deltaTime);
-    if(level.getTime() < 0){
-      game.setScreen(new MenuScreen(game));
-    }
-    //cameraHelper.update(deltaTime);
+    System.out.println("game controller update");
 
   }
 
@@ -71,20 +58,24 @@ public class GameController extends InputAdapter{
 
   @Override
   public boolean touchDown(int x, int y, int pointer, int button){
+    //System.out.println("touch down - " + x + " " + y);
     if(y < 100) {
-      game.setScreen(new MenuScreen(game));
+      libgdxGame.setScreen(new MenuScreen(libgdxGame));
     }
     if(!animate && selectedCircle == null && pointer == 0) {
-      float X = (x - (Gdx.graphics.getWidth() / 2)) / Constants.PIXELS_TO_METERS;
-      float Y = (y - (Gdx.graphics.getHeight() / 2)) / Constants.PIXELS_TO_METERS;
-      for (int i = 0; i < level.grid.columns.length; i++) {
+      float X = x;//(x - (Gdx.graphics.getWidth() / 2)) / Constants.PIXELS_TO_METERS;
+      float Y = y;//(y - (Gdx.graphics.getHeight() / 2)) / Constants.PIXELS_TO_METERS;
+      //System.out.println(game.getGrid().columns[0].circles.get(0).getCentre());
+      //System.out.println(game.getGrid().toString());
+      for (int i = 0; i < game.getGrid().columns.length; i++) {
 
-        for (int j = 0; j < level.grid.columns[i].circles.size(); j++) {
-          Circle c = level.grid.columns[i].circles.get(j);
-          Vector2 centre = new Vector2(c.getPosition().x + 0.5f, c.getPosition().y + 0.5f);
-          if (centre.dst(X, Y) < 0.5) {
+        for (int j = 0; j < game.getGrid().columns[i].circles.size(); j++) {
+          Circle c = game.getGrid().columns[i].circles.get(j);
+          //System.out.print(c.getCentre() + " ");
+          //TODO: remove hardcoded radius
+          if (c.getCentre().dst(X, Y) < 15) {
             selectedCircle = c;
-            selectedColumn = level.grid.columns[i];
+            selectedColumn = game.getGrid().columns[i];
             c.setIsSelected(true);
             // used to keep relationship to mouse cursor when moving
             deltaX = X - c.getPosition().x;
@@ -102,23 +93,25 @@ public class GameController extends InputAdapter{
 
   @Override
   public boolean touchUp(int x, int y, int pointer, int button){
+    //System.out.println("touch up");
     if(!animate) {
-      float X = (x - (Gdx.graphics.getWidth() / 2)) / Constants.PIXELS_TO_METERS;
-      float Y = (y - (Gdx.graphics.getHeight() / 2)) / Constants.PIXELS_TO_METERS;
+      float X = x; // (x - (Gdx.graphics.getWidth() / 2)) / Constants.PIXELS_TO_METERS;
+      float Y = y; //(y - (Gdx.graphics.getHeight() / 2)) / Constants.PIXELS_TO_METERS;
       boolean intersectionFound = false;
       if (selectedCircle != null && pointer == 0) {
-        for (int i = 0; i < level.grid.columns.length; i++) {
-          for (int j = 0; j < level.grid.columns[i].circles.size(); j++) {
-            Circle c = level.grid.columns[i].circles.get(j);
-            Vector2 centre = new Vector2(c.getPosition().x + 0.5f, c.getPosition().y + 0.5f);
-            if (!c.equals(selectedCircle) && centre.dst(X, Y) < 0.5) {
+        for (int i = 0; i < game.getGrid().columns.length; i++) {
+          for (int j = 0; j < game.getGrid().columns[i].circles.size(); j++) {
+            Circle c = game.getGrid().columns[i].circles.get(j);
+            // TODO: remove hard coded radius
+            if (!c.equals(selectedCircle) && c.getCentre().dst(X, Y) < 15) {
               intersectionFound = true;
               // make set colour return false if can't set, then know when to return
               if (c.setColour(c.getColour() * selectedCircle.getColour())) {
                 selectedColumn.remove(selectedCircle);
+                processMove(game.getGrid());
                 break;
               } else {
-                selectedCircle.setPosition(new Vector2(startX, startY));
+                selectedCircle.setCurrentPosition(new Vector2(startX, startY));
                 selectedCircle.setIsSelected(false);
                 selectedCircle = null;
                 selectedColumn = null;
@@ -128,19 +121,22 @@ public class GameController extends InputAdapter{
           }
         }
         if (intersectionFound == false) {
-          selectedCircle.setPosition(new Vector2(startX, startY));
+          selectedCircle.setCurrentPosition(new Vector2(startX, startY));
           selectedCircle.setIsSelected(false);
           selectedCircle = null;
           selectedColumn = null;
         }
       }
-      level.grid.checkColumns();
-      level.grid.checkRows();
+
       try {
         animate();
       } catch (InterruptedException e){
 
       }
+    }
+    if(selectedCircle != null){
+      selectedCircle.setIsSelected(false);
+      selectedCircle = null;
     }
     return false;
   }
@@ -148,7 +144,7 @@ public class GameController extends InputAdapter{
   public void animate() throws InterruptedException{
     animate = true;
 
-    for (Circle c : level.grid.removalQueue) {
+    for (Circle c : game.getGrid().removalQueue) {
       c.setIsShrinking(true);
     }
     animate = false;
@@ -156,11 +152,18 @@ public class GameController extends InputAdapter{
 
   @Override
   public boolean touchDragged(int x, int y, int pointer){
+    //System.out.println("touch dragged");
     if(selectedCircle != null && !animate && pointer == 0){
-      selectedCircle.setPosition(new Vector2((x - (Gdx.graphics.getWidth() / 2)) / Constants.PIXELS_TO_METERS - deltaX, (y - (Gdx.graphics.getHeight() / 2)) / Constants.PIXELS_TO_METERS - deltaY));
+      System.out.println("mouse at " + x + " " + y);
+
+      selectedCircle.setCurrentPosition(new Vector2(x - deltaX, y - deltaY));
+      System.out.println("current position of circle is " + selectedCircle.getCurrentPosition());
     }
 
     return false;
+  }
+
+  protected void processMove(Grid grid){
   }
 
   @Override
@@ -175,7 +178,7 @@ public class GameController extends InputAdapter{
 
 
   private void handleInputGame(float deltaTime){
-  }*/
+  }
 
 }
 

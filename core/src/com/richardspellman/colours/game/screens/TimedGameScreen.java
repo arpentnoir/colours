@@ -16,6 +16,8 @@ public class TimedGameScreen extends AbstractGameScreen{
 
   private boolean paused;
 
+  private static final String TAG = TimedGameScreen.class.getName();
+
   public TimedGameScreen(Game game){
     super(game);
   }
@@ -37,6 +39,7 @@ public class TimedGameScreen extends AbstractGameScreen{
 
   @Override
   public void show() {
+    Gdx.app.log(TAG, "Create TimedGameController and TimedGameRenderer");
     timedGameController = new TimedGameController(game);
     timedGameRenderer = new TimedGameRenderer(timedGameController);
     Gdx.input.setCatchBackKey(true);

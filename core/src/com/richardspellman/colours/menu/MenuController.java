@@ -103,7 +103,7 @@ public class MenuController extends InputAdapter{
 
   public void open(String type){
     if(type.equals("timed") && !gravityOn){
-      Gdx.app.log(TAG, "Setting screen to Game Screen");
+      Gdx.app.log(TAG, "Set game screen to TimedGameScreen");
       game.setScreen(new TimedGameScreen(game));
     } else if(type.equals("settings") && !gravityOn){
       game.setScreen(new SettingsScreen(game));
