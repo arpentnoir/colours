@@ -1,0 +1,129 @@
+
+input1.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+about
+  rotate: false
+  xy: 2, 2
+  size: 260, 260
+  orig: 260, 260
+  offset: 0, 0
+  index: -1
+yellow
+  rotate: false
+  xy: 264, 2
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+timed
+  rotate: false
+  xy: 522, 2
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+settings
+  rotate: false
+  xy: 2, 264
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+red
+  rotate: false
+  xy: 2, 522
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+redbutton
+  rotate: false
+  xy: 2, 522
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+purple
+  rotate: false
+  xy: 260, 264
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+powerup
+  rotate: false
+  xy: 260, 522
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+orange
+  rotate: false
+  xy: 518, 264
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+moves
+  rotate: false
+  xy: 518, 522
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+button
+  rotate: false
+  xy: 780, 2
+  size: 82, 40
+  orig: 82, 40
+  offset: 0, 0
+  index: -1
+
+input2.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+grey
+  rotate: false
+  xy: 2, 2
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+green
+  rotate: false
+  xy: 260, 2
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+endless
+  rotate: false
+  xy: 518, 2
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+brown
+  rotate: false
+  xy: 2, 260
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+blue
+  rotate: false
+  xy: 2, 518
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+achievements
+  rotate: false
+  xy: 260, 260
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1

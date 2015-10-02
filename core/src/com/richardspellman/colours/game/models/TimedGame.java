@@ -26,4 +26,8 @@ public class TimedGame extends BaseGame{
     return time;
   }
 
+  public void incrementTime(int seconds){
+    time += seconds;
+  }
+
 }

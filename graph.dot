@@ -1,0 +1,30 @@
+digraph {
+    label="Application Startup";
+
+    node[shape="box", style="rounded"]
+       start; begin_tutorial; display_menu; place_holder;
+       begin_timed_play;
+    node[shape=“box”, style=""]
+       splash_screen; load_assets; device_resolution;
+    node[shape="diamond", style=""]
+       first_play;
+
+    start -> splash_screen;
+    splash_screen -> load_assets;
+    load_assets -> device_resolution;
+    device_resolution -> first_play;
+    first_play -> display_menu[label="yes"];
+    first_play -> begin_tutorial[label="no"];
+    display_menu -> place_holder;
+    place_holder -> begin_timed_play;
+
+    splash_screen[label="Display Logo"]
+    first_play[label="Has user\nplayed before?"]
+    begin_tutorial[label="Begin Tutorial"]
+    display_menu[label="Display Menu"]
+    load_assets[label="Load game assets"]
+    device_resolution[label="Check device resolution"]
+    begin_timed_play[label="Begin Timed Play"]
+
+
+}

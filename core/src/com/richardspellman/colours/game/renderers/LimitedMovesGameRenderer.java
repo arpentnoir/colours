@@ -52,13 +52,13 @@ public class LimitedMovesGameRenderer implements Disposable {
     renderPowerupsMenu(batch);
     renderTimer(batch);
     renderScore(batch);
-    Assets.instance.fonts.defaultBig.draw(batch, "Limited Moves Game", 0, 0);
+    //Assets.instance.fonts.defaultBig.draw(batch, "Limited Moves Game", 0, 0);
     batch.end();
 
   }
 
   public void renderTimer(SpriteBatch batch){
-    Assets.instance.fonts.defaultBig.draw(batch, "Moves  " + String.format("%.0f%n", limitedMovesGameController.getGame().getMoves()), Constants.VIEWPORT_GUI_WIDTH / 6, Constants.VIEWPORT_GUI_HEIGHT / 20);
+    Assets.instance.fonts.defaultSmall.draw(batch, "Moves  " + String.format("%.0f%n", limitedMovesGameController.getGame().getMoves()), Constants.VIEWPORT_GUI_WIDTH / 6, Constants.VIEWPORT_GUI_HEIGHT / 20);
 
   }
 
@@ -75,7 +75,7 @@ public class LimitedMovesGameRenderer implements Disposable {
   }
 
   public void renderScore(SpriteBatch batch){
-    Assets.instance.fonts.defaultBig.draw(batch, "Score  " + limitedMovesGameController.getGame().getScore(), (Constants.VIEWPORT_GUI_WIDTH / 6) * 4, Constants.VIEWPORT_GUI_HEIGHT / 20);
+    Assets.instance.fonts.defaultSmall.draw(batch, "Score  " + limitedMovesGameController.getGame().getScore(), (Constants.VIEWPORT_GUI_WIDTH / 6) * 4, Constants.VIEWPORT_GUI_HEIGHT / 20);
 
   }
   public void renderDebug(SpriteBatch batch){

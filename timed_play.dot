@@ -1,0 +1,18 @@
+digraph {
+    label="Timed Play";
+
+    node[shape="box", style="rounded"]
+       start; 
+    node[shape=“box”, style=""]
+       menu_screen;
+    node[shape="diamond", style=""]
+       menu_selection;
+
+    start -> menu_screen;
+    menu_screen -> menu_selection;
+ 
+
+    menu_screen[label="MenuController\nListen for\nuser input"]
+    menu_selection[label="Select a\nmenu item"]
+
+}

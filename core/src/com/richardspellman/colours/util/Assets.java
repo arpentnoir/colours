@@ -1,6 +1,7 @@
 package com.richardspellman.colours.util;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetErrorListener;
 import com.badlogic.gdx.assets.AssetManager;
@@ -8,6 +9,8 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetDescriptor;
@@ -83,6 +86,8 @@ public class Assets implements Disposable, AssetErrorListener {
   public AssetTreePlus treePlus;
   public AssetWhite white;
 
+  public Preferences preferences;
+
 
   private AssetManager assetManager;
   // singleton: prevent instantiation from other classes
@@ -90,6 +95,8 @@ public class Assets implements Disposable, AssetErrorListener {
 
   public void init (AssetManager assetManager){
     this.assetManager = assetManager;
+
+    preferences = Gdx.app.getPreferences("preferences");
 
     // Set asset manager error handler
     assetManager.setErrorListener(this);
@@ -477,10 +484,18 @@ public class Assets implements Disposable, AssetErrorListener {
     public final BitmapFont defaultBig;
 
     public AssetFonts(){
-      // create three fonts using Libgdx's 15px bitmap font
-      defaultSmall = new BitmapFont(Gdx.files.internal("images/arial-15.fnt"), true);
+      FileHandle fontFile = Gdx.files.internal("Roboto-Thin.ttf");
+      FreeTypeFontGenerator generator = new FreeTypeFontGenerator(fontFile);
+      FreeTypeFontParameter parameter = new FreeTypeFontParameter();
+      parameter.size = 12;
+      parameter.flip = true;
+      defaultSmall = generator.generateFont(parameter);
+      parameter.size = 48;
       defaultNormal = new BitmapFont(Gdx.files.internal("images/arial-15.fnt"), true);
-      defaultBig = new BitmapFont(Gdx.files.internal("images/arial-15.fnt"), true);
+      defaultBig = generator.generateFont(parameter);
+      defaultSmall.setColor(0, 0, 0, 255);
+      defaultBig.setColor(0, 0, 0, 255);
+
 
       // set font sizes
       //defaultSmall.setScale(0.75f);
@@ -494,7 +509,7 @@ public class Assets implements Disposable, AssetErrorListener {
 
 
 
-        FileHandle fontFile = Gdx.files.internal("Roboto-Bold.ttf");
+        //FileHandle fontFile = Gdx.files.internal("Roboto-Bold.ttf");
         //FreeTypeFontGenerator generator = new FreeTypeFontGenerator(fontFile);
         //FreeTypeFontParameter parameter = new FreeTypeFontParameter();
         //parameter.size = 12;

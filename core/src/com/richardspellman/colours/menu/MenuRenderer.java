@@ -3,6 +3,8 @@ package com.richardspellman.colours.menu;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Matrix4;
@@ -24,6 +26,8 @@ public class MenuRenderer implements Disposable{
   private Box2DDebugRenderer debugRenderer;
   private ShapeRenderer shapeRenderer;
   Matrix4 debugMatrix;
+  private SpriteBatch GUIbatch;
+  double stringWidth;
 
   public MenuRenderer(MenuController menuController){
     this.menuController = menuController;
@@ -35,6 +39,7 @@ public class MenuRenderer implements Disposable{
     camera = new OrthographicCamera(Constants.VIEWPORT_WIDTH, Constants.VIEWPORT_HEIGHT);
     camera.position.set(0, 0, 0);
     camera.update();
+    GUIbatch = new SpriteBatch();
     cameraGUI = new OrthographicCamera(Constants.VIEWPORT_GUI_WIDTH, Constants.VIEWPORT_GUI_HEIGHT);
     cameraGUI.position.set(0, 0, 0);
     cameraGUI.setToOrtho(true); // flip y-axis
@@ -44,10 +49,16 @@ public class MenuRenderer implements Disposable{
     debugMatrix = new Matrix4(camera.combined);
     debugMatrix.scale(0.5f, 0.5f, 0.5f);
     shapeRenderer = new ShapeRenderer();
+
+    GlyphLayout layout = new GlyphLayout(); //dont do this every frame! Store it as member
+    layout.setText(Assets.instance.fonts.defaultBig, "Colours");
+    stringWidth = layout.width;// contains the width of the current set text
+    float height = layout.height; // contains the height of the current set text
   }
 
   public void render(){
     renderMenu(batch);
+    renderGUI(batch);
     //System.out.println(Gdx.input.getAccelerometerX());
     //debugRenderer.render(menuController.world, camera.combined);
     //renderDebug(batch);
@@ -58,9 +69,17 @@ public class MenuRenderer implements Disposable{
     batch.setProjectionMatrix(camera.combined);
     batch.begin();
     menuController.menu.render(batch);
-    Assets.instance.fonts.defaultBig.draw(batch, "(" + menuController.mouseX + ", " + menuController.mouseY + ")", 200, 50);
+    //Assets.instance.fonts.defaultBig.draw(batch, "(" + menuController.mouseX + ", " + menuController.mouseY + ")", 200, 50);
+
     batch.end();
 
+  }
+
+  public void renderGUI(SpriteBatch batch){
+    batch.setProjectionMatrix(cameraGUI.combined);
+    batch.begin();
+    Assets.instance.fonts.defaultBig.draw(batch, "Colors", (int) (Constants.VIEWPORT_GUI_WIDTH / 2 - stringWidth / 2), 50);
+    batch.end();
   }
 
   public void renderDebug(SpriteBatch batch){

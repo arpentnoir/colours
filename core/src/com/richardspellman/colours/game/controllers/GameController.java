@@ -154,10 +154,10 @@ public class GameController extends InputAdapter{
   public boolean touchDragged(int x, int y, int pointer){
     //System.out.println("touch dragged");
     if(selectedCircle != null && !animate && pointer == 0){
-      System.out.println("mouse at " + x + " " + y);
+      //System.out.println("mouse at " + x + " " + y);
 
       selectedCircle.setCurrentPosition(new Vector2(x - deltaX, y - deltaY));
-      System.out.println("current position of circle is " + selectedCircle.getCurrentPosition());
+      //System.out.println("current position of circle is " + selectedCircle.getCurrentPosition());
     }
 
     return false;

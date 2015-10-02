@@ -51,14 +51,14 @@ public class Circle{
     scale = new Vector2(1f, 1f);
     this.gridPosition = gridPosition;
     //TODO: finalise the current position on creation
-    currentPosition = new Vector2(gridPosition.x * seperation + xOffset, -gridPosition.y * seperation * 2 - yOffset );
+    currentPosition = new Vector2(gridPosition.x * seperation + xOffset, -gridPosition.y * seperation * 2 - yOffset / 2 );
     position = new Vector2(gridPosition.x * seperation + xOffset, -gridPosition.y * seperation + yOffset * 2);
     centre = new Vector2(position.x  + (size / 2), position.y + (size / 2));
     setColour(colour);
     isSelected = false;
     isShrinking = false;
     isMoving = false;
-    System.out.println("Created circle with current position =" + currentPosition);
+    //System.out.println("Created circle with current position =" + currentPosition);
   }
 
   public void update(float deltaTime){
@@ -93,6 +93,7 @@ public class Circle{
   public void render(SpriteBatch batch){
     regCircle = getRegion();
     TextureRegion region = regCircle;
+    //System.out.println(colour + " " + regCircle);
 
     regCircle.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 

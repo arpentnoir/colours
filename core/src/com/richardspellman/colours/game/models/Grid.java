@@ -64,7 +64,21 @@ public class Grid {
     for(Circle circle : removalQueue){
       columns[(int) circle.getGridPosition().x].remove(circle);
     }
+    removalQueue = new ArrayList<Circle>();
 
+  }
+
+  public int getBrownCount(){
+    int count = 0;
+    for(Circle circle : removalQueue){
+      if(circle.getColour() == 30){
+        count++;
+        System.out.println("found brown circle in removal queue");
+      }
+    }
+    System.out.println(count);
+    System.out.println(removalQueue.size());
+    return count;
   }
 
   public void checkColumns(){
@@ -95,7 +109,7 @@ public class Grid {
         }
         if (count >= 4) {
           for (int j = firstIndex; j <= lastIndex; j++) {
-            System.out.println("adding to removal queue");
+            //System.out.println("adding to removal queue");
             removalQueue.add(columns[i].circles.get(j));
           }
         }
@@ -130,7 +144,7 @@ public class Grid {
       }
       if (count >= 4) {
         for (int i = firstIndex; i <= lastIndex; i++) {
-          System.out.println("adding to removal queue");
+          //System.out.println("adding to removal queue");
           removalQueue.add(columns[i].circles.get(j));
         }
       }

@@ -52,7 +52,7 @@ public class EndlessGameRenderer implements Disposable {
     renderPowerupsMenu(batch);
     renderTimer(batch);
     renderScore(batch);
-    Assets.instance.fonts.defaultBig.draw(batch, "Endless Game", 0, 0);
+    //Assets.instance.fonts.defaultBig.draw(batch, "Endless Game", 0, 0);
     batch.end();
 
   }
@@ -74,7 +74,7 @@ public class EndlessGameRenderer implements Disposable {
   }
 
   public void renderScore(SpriteBatch batch){
-    Assets.instance.fonts.defaultBig.draw(batch, "Score  " + endlessGameController.getGame().getScore(), (Constants.VIEWPORT_GUI_WIDTH / 6) * 4, Constants.VIEWPORT_GUI_HEIGHT / 20);
+    Assets.instance.fonts.defaultSmall.draw(batch, "Score  " + endlessGameController.getGame().getScore(), (Constants.VIEWPORT_GUI_WIDTH / 6) * 4, Constants.VIEWPORT_GUI_HEIGHT / 20);
 
   }
 

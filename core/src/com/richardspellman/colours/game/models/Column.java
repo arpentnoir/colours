@@ -55,12 +55,13 @@ public class Column {
 
   public void remove(Circle circle){
     circles.remove(circle);
+    float gridX = circle.getGridPosition().x;
     for(int i = 0; i < circles.size(); i++){
       Circle c = circles.get(i);
-      c.setGridPosition(new Vector2(c.getGridPosition().x, i));
+      c.setGridPosition(new Vector2(gridX, i));
     }
     int rank = circles.size();
-    Circle c = new Circle(new Vector2((position - 3.5f) * 1.05f, (-rank) * 1.05f), colours[random.nextInt(7)]);
+    Circle c = new Circle(new Vector2(gridX, rank), colours[random.nextInt(7)]);
     add(c);
     c.setRank(rank);
   }

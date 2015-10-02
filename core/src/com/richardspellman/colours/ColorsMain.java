@@ -3,13 +3,16 @@ package com.richardspellman.colours;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.richardspellman.colours.game.models.GameState;
 import com.richardspellman.colours.game.screens.MenuScreen;
 import com.richardspellman.colours.util.Assets;
 
 public class ColorsMain extends Game {
 	SpriteBatch batch;
+	Preferences preferences;
 
 	private static final String TAG = ColorsMain.class.getName();
 

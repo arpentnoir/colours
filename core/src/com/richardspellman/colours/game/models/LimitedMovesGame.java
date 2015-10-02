@@ -13,6 +13,7 @@ public class LimitedMovesGame extends BaseGame{
 
   @Override
   public void update(float deltaTime){
+    grid.update(deltaTime);
   }
 
   public float getMoves() {
@@ -21,6 +22,10 @@ public class LimitedMovesGame extends BaseGame{
 
   public void decrementMoves(){
     moves -= 1;
+  }
+
+  public void incrementMoves(int count){
+    moves += count;
   }
 
 }

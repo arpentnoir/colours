@@ -54,13 +54,13 @@ public class TimedGameRenderer implements Disposable {
     renderPowerupsMenu(batch);
     renderTimer(batch);
     renderScore(batch);
-    Assets.instance.fonts.defaultBig.draw(batch, "Timed Game", 0, 0);
+    //Assets.instance.fonts.defaultSmall.draw(batch, "Timed Game", 0, 0);
     batch.end();
 
   }
 
   public void renderTimer(SpriteBatch batch){
-    Assets.instance.fonts.defaultBig.draw(batch, "Time  " + String.format("%.0f%n", timedGameController.getGame().getTime()), Constants.VIEWPORT_GUI_WIDTH / 6, Constants.VIEWPORT_GUI_HEIGHT / 20);
+    Assets.instance.fonts.defaultSmall.draw(batch, "Time  " + String.format("%.0f%n", timedGameController.getGame().getTime()), Constants.VIEWPORT_GUI_WIDTH / 6, Constants.VIEWPORT_GUI_HEIGHT / 20);
 
   }
 
@@ -77,7 +77,7 @@ public class TimedGameRenderer implements Disposable {
   }
 
   public void renderScore(SpriteBatch batch){
-    Assets.instance.fonts.defaultBig.draw(batch, "Score  " + timedGameController.getGame().getScore(), (Constants.VIEWPORT_GUI_WIDTH / 6) * 4, Constants.VIEWPORT_GUI_HEIGHT / 20);
+    Assets.instance.fonts.defaultSmall.draw(batch, "Score  " + timedGameController.getGame().getScore(), (Constants.VIEWPORT_GUI_WIDTH / 6) * 4, Constants.VIEWPORT_GUI_HEIGHT / 20);
 
   }
 
