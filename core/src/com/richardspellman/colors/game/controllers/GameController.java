@@ -12,6 +12,7 @@ import com.richardspellman.colors.game.models.Column;
 import com.richardspellman.colors.game.models.Grid;
 import com.richardspellman.colors.game.screens.MenuScreen;
 import com.richardspellman.colors.util.CameraHelper;
+import com.richardspellman.colors.util.Constants;
 
 /**
  * Created by richardspellman on 21/09/15.
@@ -72,7 +73,7 @@ public class GameController extends InputAdapter{
           Circle c = game.getGrid().columns[i].circles.get(j);
           //System.out.print(c.getCentre() + " ");
           //TODO: remove hardcoded radius
-          if (c.getCentre().dst(X, Y) < 15) {
+          if (c.getCentre().dst(X, Y) < Constants.VIEWPORT_GUI_WIDTH / 9.0) {
             selectedCircle = c;
             selectedColumn = game.getGrid().columns[i];
             c.setIsSelected(true);
@@ -102,7 +103,7 @@ public class GameController extends InputAdapter{
           for (int j = 0; j < game.getGrid().columns[i].circles.size(); j++) {
             Circle c = game.getGrid().columns[i].circles.get(j);
             // TODO: remove hard coded radius
-            if (!c.equals(selectedCircle) && c.getCentre().dst(X, Y) < 15) {
+            if (!c.equals(selectedCircle) && c.getCentre().dst(X, Y) < Constants.VIEWPORT_GUI_WIDTH / 9.0) {
               intersectionFound = true;
               // make set colour return false if can't set, then know when to return
               if (c.setColour(c.getColour() * selectedCircle.getColour())) {
