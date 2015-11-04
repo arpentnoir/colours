@@ -60,7 +60,15 @@ public class Column {
       c.setGridPosition(new Vector2(gridX, i));
     }
     int rank = circles.size();
-    Circle c = new Circle(new Vector2(gridX, rank), colours[random.nextInt(7)]);
+
+    int primary = random.nextInt(2);
+    int colour;
+    if(primary == 1){
+      colour = random.nextInt(3);
+    } else {
+      colour = random.nextInt(4) + 3;
+    }
+    Circle c = new Circle(new Vector2(gridX, rank), colours[colour]);
     add(c);
     c.setRank(rank);
   }

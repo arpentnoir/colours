@@ -45,8 +45,16 @@ public class Grid {
   public void initGrid(){
     for (int i = 0; i < columns.length; i++){
       Column column = columns[i];
+
       for(int j = 0; j < 7; j++){
-        column.add(new Circle(new Vector2(i, j), colours[random.nextInt(7)]));
+        int primary = random.nextInt(2);
+        int colour;
+        if(primary == 1){
+          colour = random.nextInt(3);
+        } else {
+          colour = random.nextInt(4) + 3;
+        }
+        column.add(new Circle(new Vector2(i, j), colours[colour]));
       }
     }
   }
