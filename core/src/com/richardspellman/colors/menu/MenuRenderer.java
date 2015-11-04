@@ -128,7 +128,7 @@ public class MenuRenderer implements Disposable{
     //}
 
     // about position
-    //shapeRenderer.circle(menuController.menu.menuItems.get(0).body.getPosition().x, menuController.menu.menuItems.get(0).body.getPosition().x, 1);
+    shapeRenderer.circle(menuController.menu.menuItems.get(0).body.getPosition().x, menuController.menu.menuItems.get(0).body.getPosition().x, 1);
     /*shapeRenderer.line(menuController.menu.menuItems.get(0).body.getPosition().x,
         menuController.menu.menuItems.get(0).body.getPosition().y + 1,
         menuController.menu.menuItems.get(0).body.getPosition().x,

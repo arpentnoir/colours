@@ -38,7 +38,7 @@ public class Menu {
       Body aboutBody = world.createBody(bodyDefAbout);
       aboutButton.body = aboutBody;
       CircleShape circle = new CircleShape();
-      circle.setRadius(1f);
+      circle.setRadius(0.93f);
 
       FixtureDef fixtureDefAbout = new FixtureDef();
       fixtureDefAbout.shape = circle;
