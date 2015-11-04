@@ -107,15 +107,15 @@ public class MenuController extends InputAdapter{
       game.setScreen(new TimedGameScreen(game));
     } else if(type.equals("settings") && !gravityOn){
       game.setScreen(new SettingsScreen(game));
-    } else if(type.equals("about")){
+    } else if(type.equals("about") && !gravityOn){
       game.setScreen(new AboutScreen(game));
-    } else if(type.equals("endless")) {
+    } else if(type.equals("endless") && !gravityOn) {
       game.setScreen(new EndlessGameScreen(game));
-    } else if(type.equals("achievements")) {
+    } else if(type.equals("achievements") && !gravityOn) {
       game.setScreen(new AchievementsScreen(game));
-    } else if(type.equals("moves")) {
+    } else if(type.equals("moves") && !gravityOn) {
       game.setScreen(new LimitedMovesGameScreen(game));
-    } else if(type.equals("powerup")) {
+    } else if(type.equals("powerup") && !gravityOn) {
       game.setScreen(new PowerupsScreen(game));
     } else if(type.equals("redButton") && !gravityOn){
       gravityOn = true;

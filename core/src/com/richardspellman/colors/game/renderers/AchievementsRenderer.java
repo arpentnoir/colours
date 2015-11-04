@@ -1,6 +1,7 @@
 package com.richardspellman.colors.game.renderers;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Disposable;
 import com.richardspellman.colors.game.controllers.AchievementsController;
@@ -16,6 +17,7 @@ public class AchievementsRenderer implements Disposable{
     private OrthographicCamera camera;
     private SpriteBatch batch;
     private AchievementsController achievementsController;
+    float stringWidth;
 
 
 
@@ -30,6 +32,12 @@ public class AchievementsRenderer implements Disposable{
       camera.position.set(0, 0, 0);
       camera.setToOrtho(true);
       camera.update();
+
+      GlyphLayout layout = new GlyphLayout(); //dont do this every frame! Store it as member
+      layout.setText(Assets.instance.fonts.defaultBig, "Achievements");
+      stringWidth = layout.width;// contains the width of the current set text
+      //float height = layout.height; // contains the height of the current set text
+
     }
 
     public void render(){
@@ -39,9 +47,9 @@ public class AchievementsRenderer implements Disposable{
     public void renderAchievements(SpriteBatch batch){
       batch.setProjectionMatrix(camera.combined);
       batch.begin();
-      Assets.instance.fonts.defaultBig.draw(batch, "Achievements", 10, 0);
-      Assets.instance.fonts.defaultSmall.draw(batch, "Timed High score: " + Assets.instance.preferences.getInteger("timedHighScoreValue", 0), 10, 50);
-      Assets.instance.fonts.defaultSmall.draw(batch, "Moves High score: " + Assets.instance.preferences.getInteger("movesHighScoreValue", 0), 10, 100);
+      Assets.instance.fonts.defaultBig.draw(batch, "Achievements", (int) (Constants.VIEWPORT_GUI_WIDTH / 2 - stringWidth / 2), 50);
+      Assets.instance.fonts.defaultSmall.draw(batch, "Timed High score: " + Assets.instance.preferences.getInteger("timedHighScoreValue", 0), 10, 100);
+      Assets.instance.fonts.defaultSmall.draw(batch, "Moves High score: " + Assets.instance.preferences.getInteger("movesHighScoreValue", 0), 10, 150);
       batch.end();
 
     }

@@ -40,6 +40,11 @@ public class LimitedMovesGameController extends GameController{
   @Override
   public void processMove(Grid grid){
     ((LimitedMovesGame) game).decrementMoves();
+   checkGrid(grid);
+  }
+
+  @Override
+  public void checkGrid(Grid grid){
     grid.checkColumns();
     grid.checkRows();
     game.setScore(grid.getScore());

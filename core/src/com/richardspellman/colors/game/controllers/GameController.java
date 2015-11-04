@@ -104,6 +104,7 @@ public class GameController extends InputAdapter{
             selectedCircle.setIsSelected(false);
             selectedCircle = null;
             selectedColumn = null;
+            checkGrid(game.getGrid());
           }
         }
         if (intersectionFound == false) {
@@ -111,6 +112,7 @@ public class GameController extends InputAdapter{
           selectedCircle.setIsSelected(false);
           selectedCircle = null;
           selectedColumn = null;
+          checkGrid(game.getGrid());
         }
       }
 
@@ -169,6 +171,10 @@ public class GameController extends InputAdapter{
   }
 
   protected void processMove(Grid grid){
+  }
+
+  protected void checkGrid(Grid grid){
+
   }
 
   @Override

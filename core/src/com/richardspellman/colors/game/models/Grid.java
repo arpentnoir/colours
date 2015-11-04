@@ -73,11 +73,8 @@ public class Grid {
     for(Circle circle : removalQueue){
       if(circle.getColour() == 30){
         count++;
-        System.out.println("found brown circle in removal queue");
       }
     }
-    System.out.println(count);
-    System.out.println(removalQueue.size());
     return count;
   }
 

@@ -474,7 +474,7 @@ public class Assets implements Disposable, AssetErrorListener {
       FileHandle fontFile = Gdx.files.internal("Roboto-Thin.ttf");
       FreeTypeFontGenerator generator = new FreeTypeFontGenerator(fontFile);
       FreeTypeFontParameter parameter = new FreeTypeFontParameter();
-      parameter.size = 12;
+      parameter.size = 20;
       parameter.flip = true;
       defaultSmall = generator.generateFont(parameter);
       parameter.size = 48;
