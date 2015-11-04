@@ -67,27 +67,20 @@ public class GameController extends InputAdapter{
       float Y = y;//(y - (Gdx.graphics.getHeight() / 2)) / Constants.PIXELS_TO_METERS;
       //System.out.println(game.getGrid().columns[0].circles.get(0).getCentre());
       //System.out.println(game.getGrid().toString());
-      for (int i = 0; i < game.getGrid().columns.length; i++) {
 
-        for (int j = 0; j < game.getGrid().columns[i].circles.size(); j++) {
-          Circle c = game.getGrid().columns[i].circles.get(j);
-          //System.out.print(c.getCentre() + " ");
-          //TODO: remove hardcoded radius
-          if (c.getCentre().dst(X, Y) < Constants.VIEWPORT_GUI_WIDTH / 9.0) {
-            selectedCircle = c;
-            selectedColumn = game.getGrid().columns[i];
-            c.setIsSelected(true);
-            // used to keep relationship to mouse cursor when moving
-            deltaX = X - c.getPosition().x;
-            deltaY = Y - c.getPosition().y;
+      selectedCircle = getClosestCircle(X, Y);
+      selectedColumn = game.getGrid().columns[(int) selectedCircle.getGridPosition().x];
+      //selectedCircle.setColour(30);
+      selectedCircle.setIsSelected(true);
+      // used to keep relationship to mouse cursor when moving
+      deltaX = X - selectedCircle.getPosition().x;
+      deltaY = Y - selectedCircle.getPosition().y;
 
-            // used to snap back to original position if no candidate position found
-            startX = c.getPosition().x;
-            startY = c.getPosition().y;
-          }
-        }
+      // used to snap back to original position if no candidate position found
+      startX = selectedCircle.getPosition().x;
+      startY = selectedCircle.getPosition().y;
+
       }
-    }
     return false;
   }
 
@@ -99,25 +92,18 @@ public class GameController extends InputAdapter{
       float Y = y; //(y - (Gdx.graphics.getHeight() / 2)) / Constants.PIXELS_TO_METERS;
       boolean intersectionFound = false;
       if (selectedCircle != null && pointer == 0) {
-        for (int i = 0; i < game.getGrid().columns.length; i++) {
-          for (int j = 0; j < game.getGrid().columns[i].circles.size(); j++) {
-            Circle c = game.getGrid().columns[i].circles.get(j);
-            // TODO: remove hard coded radius
-            if (!c.equals(selectedCircle) && c.getCentre().dst(X, Y) < Constants.VIEWPORT_GUI_WIDTH / 9.0) {
-              intersectionFound = true;
-              // make set colour return false if can't set, then know when to return
-              if (c.setColour(c.getColour() * selectedCircle.getColour())) {
-                selectedColumn.remove(selectedCircle);
-                processMove(game.getGrid());
-                break;
-              } else {
-                selectedCircle.setCurrentPosition(new Vector2(startX, startY));
-                selectedCircle.setIsSelected(false);
-                selectedCircle = null;
-                selectedColumn = null;
-                break;
-              }
-            }
+        Circle candidate = getClosestCircle(X, Y);
+        if(candidate != null){
+          intersectionFound = true;
+          // make set colour return false if can't set, then know when to return
+          if (candidate.setColour(candidate.getColour() * selectedCircle.getColour())) {
+            selectedColumn.remove(selectedCircle);
+            processMove(game.getGrid());
+          } else {
+            selectedCircle.setCurrentPosition(new Vector2(startX, startY));
+            selectedCircle.setIsSelected(false);
+            selectedCircle = null;
+            selectedColumn = null;
           }
         }
         if (intersectionFound == false) {
@@ -148,6 +134,25 @@ public class GameController extends InputAdapter{
       c.setIsShrinking(true);
     }
     animate = false;
+  }
+
+  public Circle getClosestCircle(float x, float y){
+
+    float min_distance = 1000000.0f;
+    float distance;
+    Circle candidateCircle = null;
+    for (int i = 0; i < game.getGrid().columns.length; i++) {
+      for (int j = 0; j < game.getGrid().columns[i].circles.size(); j++) {
+        Circle c = game.getGrid().columns[i].circles.get(j);
+        distance = c.getCentre().dst(x, y);
+        if (!c.equals(selectedCircle) && distance < min_distance) {
+          min_distance = distance;
+          candidateCircle = c;
+        }
+      }
+    }
+    System.out.println(candidateCircle.getGridPosition());
+    return candidateCircle;
   }
 
   @Override
