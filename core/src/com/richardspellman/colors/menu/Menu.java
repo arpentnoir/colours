@@ -181,10 +181,10 @@ public class Menu {
 
       BodyDef bodyDefRightWall = new BodyDef();
       bodyDefRightWall.type = BodyDef.BodyType.KinematicBody;
-      bodyDefRightWall.position.set(5.6f, 0);
+      bodyDefRightWall.position.set(5.5f, 0);
       Body bodyRightWall = world.createBody(bodyDefRightWall);
       PolygonShape polygonShapeWall = new PolygonShape();
-      polygonShape.setAsBox(0.5f, 14f);
+      polygonShape.setAsBox(1f, 14f);
 
       FixtureDef fixtureDefRightWall = new FixtureDef();
       fixtureDefRightWall.shape = polygonShapeWall;
@@ -194,7 +194,7 @@ public class Menu {
 
       BodyDef bodyDefLeftWall = new BodyDef();
       bodyDefLeftWall.type = BodyDef.BodyType.KinematicBody;
-      bodyDefLeftWall.position.set(-5.6f, 0);
+      bodyDefLeftWall.position.set(-5.5f, 0);
       Body bodyLeftWall = world.createBody(bodyDefLeftWall);
 
 
