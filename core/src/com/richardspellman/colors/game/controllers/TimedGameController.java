@@ -3,6 +3,7 @@ package com.richardspellman.colors.game.controllers;
 import com.badlogic.gdx.Game;
 import com.richardspellman.colors.game.models.Grid;
 import com.richardspellman.colors.game.models.TimedGame;
+import com.richardspellman.colors.game.screens.EndGameScreen;
 import com.richardspellman.colors.game.screens.MenuScreen;
 import com.richardspellman.colors.util.Assets;
 
@@ -33,7 +34,7 @@ public class TimedGameController extends GameController {
     game.update(deltaTime);
     if(((TimedGame) game).getTime() < 0){
       finishGame();
-      libgdxGame.setScreen(new MenuScreen(libgdxGame));
+      libgdxGame.setScreen(new EndGameScreen(libgdxGame));
     }
   }
 
