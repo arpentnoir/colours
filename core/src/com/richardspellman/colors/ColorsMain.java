@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.richardspellman.colors.game.screens.MenuScreen;
 import com.richardspellman.colors.util.Assets;
 
+
 public class ColorsMain extends Game {
 	SpriteBatch batch;
 	Preferences preferences;
@@ -33,6 +34,7 @@ public class ColorsMain extends Game {
 		// load settings
 		// if first time, go to tutorial
 		// else, go to menu screen
+
 
 		setScreen(new MenuScreen(this));
 

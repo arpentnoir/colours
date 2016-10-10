@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_id">750060841441</string>
+
+    <string name="play_timed_mode">CgkI4dPwmOoVEAIQAA</string>
+    <string name="play_limited_moves_mode">CgkI4dPwmOoVEAIQAQ</string>
+    <string name="play_challenge_mode">CgkI4dPwmOoVEAIQAg</string>
+    <string name="play_5_games">CgkI4dPwmOoVEAIQAw</string>
+    <string name="play_10_games">CgkI4dPwmOoVEAIQBA</string>
+
+    <string name="timed_mode_leaderboard">CgkI4dPwmOoVEAIQBQ</string>
+    <string name="limited_moves_mode_leaderboard">CgkI4dPwmOoVEAIQBg</string>
+</resources>

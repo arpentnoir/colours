@@ -50,7 +50,7 @@ public class EndGameRenderer implements Disposable{
     batch.setProjectionMatrix(camera.combined);
     batch.begin();
     Assets.instance.fonts.defaultBig.draw(batch, "Game Over", (int) (Constants.VIEWPORT_GUI_WIDTH / 2 - stringWidth / 2), 50);
-    Assets.instance.fonts.defaultBig.draw(batch, ((BaseGame) endGameController.getGame()).getScore(), )
+    //Assets.instance.fonts.defaultBig.draw(batch, ((BaseGame) endGameController.getGame()).getScore(), )
         batch.end();
 
   }
