@@ -70,6 +70,9 @@ project(":android") {
         natives "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-x86"
 
         compile "com.google.android.gms:play-services-ads:$adMobVersion"
+        compile 'com.google.android.gms:play-services-games:8.3.0'
+        // 8.4 is the latest as of now, keep it updated
+        compile project(':BaseGameUtils')
 
 
     }
