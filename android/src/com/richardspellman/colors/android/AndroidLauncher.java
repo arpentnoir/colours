@@ -1,10 +1,8 @@
 package com.richardspellman.colors.android;
 
-import android.animation.AnimatorSet;
 import android.os.Bundle;
 
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.RelativeLayout;
 import com.badlogic.gdx.backends.android.AndroidApplication;
@@ -14,10 +12,9 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.richardspellman.colors.ColorsMain;
-import com.richardspellman.colors.util.ActionResolver;
 
 
-public class AndroidLauncher extends AndroidApplication implements ActionResolver{
+public class AndroidLauncher extends AndroidApplication{
 	private static final String TAG = "AndroidLauncher";
 	protected AdView adView;
 	@Override
@@ -54,33 +51,4 @@ public class AndroidLauncher extends AndroidApplication implements ActionResolve
 
 	}
 
-  @Override
-  public boolean getSignedInGPGS() {
-    return false;
-  }
-
-  @Override
-  public void loginGPGS() {
-
-  }
-
-  @Override
-  public void submitScoreGPGS(int score) {
-
-  }
-
-  @Override
-  public void unlockAchievementGPGS(String achievementId) {
-
-  }
-
-  @Override
-  public void getLeaderboardGPGS() {
-
-  }
-
-  @Override
-  public void getAchievementsGPGS() {
-
-  }
 }
